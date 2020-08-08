@@ -406,8 +406,8 @@ def crawling():
 
         # hitter(driver, yearFrom, yearTo, teamList)
         # pitcher(driver, yearFrom, yearTo, teamList)
-        defence(driver, 2018, 2018, teamList)
-        # runner(driver, 2018, 2020, teamList)
+        # defence(driver, yearFrom, yearTo, teamList)
+        runner(driver, 2018, 2019, teamList)
     except BaseException as e:
         print("----------------------------------")
         print("error :")
