@@ -51,7 +51,6 @@ def hitter(driver, yearFrom, yearTo, teamList):
 
     for year in range(yearFrom, (yearTo + 1)):
         setYear(year, driver)
-        time.sleep(2)
 
         for team in teamList:
             if year < 2008:
@@ -68,7 +67,6 @@ def hitter(driver, yearFrom, yearTo, teamList):
                     continue
 
             setTeam(team, driver)
-            time.sleep(2)
 
             for line in range(1, 21):
                 table[line - 1][0] = year
@@ -135,7 +133,6 @@ def pitcher(driver, yearFrom, yearTo, teamList):
 
     for year in range(yearFrom, (yearTo + 1)):
         setYear(year, driver)
-        time.sleep(2)
 
         for team in teamList:
             if year < 2008:
@@ -152,7 +149,6 @@ def pitcher(driver, yearFrom, yearTo, teamList):
                     continue
 
             setTeam(team, driver)
-            time.sleep(2)
             lineTo = 20
 
             if year == 2013 and team == 'WO':
@@ -238,7 +234,6 @@ def defence(driver, yearFrom, yearTo, teamList):
 
     for year in range(yearFrom, (yearTo + 1)):
         setYear(year, driver)
-        time.sleep(2)
 
         for team in teamList:
             if year < 2008:
@@ -255,10 +250,8 @@ def defence(driver, yearFrom, yearTo, teamList):
                     continue
 
             setTeam(team, driver)
-            time.sleep(2)
-            lineTo = 20
 
-            for line in range(1, (lineTo + 1)):
+            for line in range(1, 21):
                 table[line - 1][0] = year
 
                 for idx in range(1, 18):
@@ -271,7 +264,7 @@ def defence(driver, yearFrom, yearTo, teamList):
                             "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
                         table[line - 1][idx] = data.text
 
-            for line in range(0, lineTo):
+            for line in range(0, 20):
                 if table[line][17] == '-':
                     csper = 0
                 else:
@@ -296,8 +289,7 @@ def defence(driver, yearFrom, yearTo, teamList):
                 sql = """insert into defencedb
                       (name, teamName, year, pos, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
                       values('%s', '%s', '%d', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%d', '%d', '%f', '%d', '%d', '%d', '%f')
-                      """ % (
-                name, teamname, yearVal, pos, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
+                      """ % (name, teamname, yearVal, pos, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
 
                 cur.execute(sql)
                 conn.commit()
@@ -313,52 +305,73 @@ def runner(driver, yearFrom, yearTo, teamList):
 
     table = []
 
-    for year in range(yearFrom, yearTo):
+    passwd = input("비번을 입력하세요 : ")
+    conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
+    cur = conn.cursor()
+
+    for i in range(0, 20):
+        table.append([])
+
+        for j in range(0, 11):
+            table[i].append('a')
+
+    for year in range(yearFrom, (yearTo + 1)):
         setYear(year, driver)
+        time.sleep(2)
 
         for team in teamList:
+            if year < 2008:
+                if team == 'WO' or team == 'NC' or team == 'KT':
+                    continue
+            elif year < 2013:
+                if team == 'HD' or team == 'NC' or team == 'KT':
+                    continue
+            elif year < 2015:
+                if team == 'HD' or team == 'KT':
+                    continue
+            else:
+                if team == 'HD':
+                    continue
+
             setTeam(team, driver)
 
-            for line in range(1, 31):
-                table.append([])
+            for line in range(1, 21):
+                table[line - 1][0] = year
 
-                for idx in range(1, 10):
+                for idx in range(1, 11):
                     try:
                         data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]/table/tbody/tr[" + str(
-                                line) + "]/td[" + str(idx) + "]")
-                        table[line - 1].append(data.text)
+                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
+                        table[line - 1][idx] = data.text
                     except BaseException as e:
                         data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]/table/tbody/tr[" + str(
-                                line) + "]/td[" + str(idx) + "]")
-                        table[line - 1].append(data.text)
+                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
+                        table[line - 1][idx] = data.text
 
-    # MySQL 연동
+            for line in range(0, 20):
+                if table[line][8] == '-':
+                    sbper = 0
+                else:
+                    sbper = float(table[line][8])
+                name = str(table[line][2])
+                teamname = str(table[line][3])
+                yearVal = int(table[line][0])
+                g = int(table[line][4])
+                sba = int(table[line][5])
+                sb = int(table[line][6])
+                cs = int(table[line][7])
+                oob = int(table[line][9])
+                pko = int(table[line][10])
 
-    connect = pymysql.connect(host='localhost', user='root', password='1q2w3e4r', db='crawling', charset='utf8')
-    cursor = connect.cursor()
+                sql = """insert into runnerdb
+                      (name, teamName, year, g, sba, sb, cs, sbper, oob, pko)
+                      values('%s', '%s', '%d', '%d', '%d', '%d', '%d', '%f', '%d', '%d')
+                      """ % (name, teamname, yearVal, g, sba, sb, cs, sbper, oob, pko)
 
-    for line in table:
-        no = int(line[0])
-        name = str(line[1])
-        teamname = str(line[2])
-        g = int(line[3])
-        sba = int(line[4])
-        sb = int(line[5])
-        cs = int(line[6])
-        oob = int(line[7])
-        pko = int(line[8])
+                cur.execute(sql)
+                conn.commit()
 
-        sql = """insert into runnerdatabase
-        (no, name, teamname, g, sba, sb, cs, oob, pko)
-        values('%d', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d')
-        """ % (no, name, teamname, g, sba, sb, cs, oob, pko)
-
-        cursor.execute(sql)
-        connect.commit()
-
-    connect.close()
+    conn.close()
 
 
 def setTeam(teamValue, driver):
@@ -381,11 +394,10 @@ def setYear(yearValue, driver):
 
 
 def crawling():
-    print("원하는 년도를 입력하세요 YYYY ~ YYYY : ")
-    # yearFrom = int(input())
-    # yearTo = int(input())
-    yearFrom = 2010
-    yearTo = 2019
+    print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
+    yearFrom = int(input())
+    print("몇 년도까지 크롤링할 지 입력하세요 (최대 2019) YYYY: ")
+    yearTo = int(input())
 
     teamList = ['OB', 'LT', 'SS', 'HH', 'HD', 'HT', 'LG', 'SK', 'WO', 'NC', 'KT']
 
@@ -404,10 +416,10 @@ def crawling():
         driver.get('https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx')
         time.sleep(2)
 
-        # hitter(driver, yearFrom, yearTo, teamList)
-        # pitcher(driver, yearFrom, yearTo, teamList)
-        # defence(driver, yearFrom, yearTo, teamList)
-        runner(driver, 2018, 2019, teamList)
+        hitter(driver, yearFrom, yearTo, teamList)
+        pitcher(driver, yearFrom, yearTo, teamList)
+        defence(driver, yearFrom, yearTo, teamList)
+        runner(driver, yearFrom, yearTo, teamList)
     except BaseException as e:
         print("----------------------------------")
         print("error :")
@@ -442,7 +454,7 @@ def setDB():
     cur.execute("CREATE TABLE defenceDB(idx INT(5) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), teamName VARCHAR(10), year INT(5), pos VARCHAR(20), g INT(3), gs INT(3), ip VARCHAR(20), e INT(3), pko INT(3), po INT(3), a INT(3), dp INT(3), fpct DOUBLE(4, 3), pb INT(3), sb INT(3), cs INT(3), csper DOUBLE(3, 1))")
 
     cur.execute("DROP TABLE IF EXISTS runnerDB")
-    cur.execute("CREATE TABLE runnerDB(idx INT(5) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), teamName VARCHAR(10), year INT(5), g INT(3), sba INT(3), sb INT(3), cs INT(3), sbper DOUBLE(3, 1), oob INT(3), pko INT(3))")
+    cur.execute("CREATE TABLE runnerDB(idx INT(5) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), teamName VARCHAR(10), year INT(5), g INT(3), sba INT(3), sb INT(3), cs INT(3), sbper DOUBLE(4, 1), oob INT(3), pko INT(3))")
 
     conn.close()
 
@@ -472,44 +484,3 @@ if __name__ == "__main__":
             crawling()
         elif choice != 4:
             print("다시 입력해주세요")
-
-"""
-    # teamList = ['OB', 'LT', 'SS', 'WO', 'HH', 'HT', 'KT', 'LG', 'NC', 'SK']
-    teamList = ['OB', 'LT']
-
-    # driver 연결 및 대기
-
-    driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
-    time.sleep(2)
-
-    try:
-
-        # 웹페이지 연결
-
-        driver.get('https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx')
-        time.sleep(2)
-
-        for year in range(2019, 2020):  # 2009년부터 2019년까지 크롤링
-            setYear(year, driver)
-            print(year)
-
-            for team in teamList:
-                setTeam(team, driver)
-                print(team)
-
-                crawling(driver)
-
-        # hitter(driver, 2018, 2020, teamList)
-        # pitcher(driver, 2018, 2020, teamList)
-        # defence(driver, 2018, 2020, teamList)
-        # runner(driver, 2018, 2020, teamList)
-
-    except BaseException as e:
-        print("----------------------------------")
-        print(e)
-        print("----------------------------------")
-    finally:
-        driver.quit()
-        print("quit driver")
-        """
-
