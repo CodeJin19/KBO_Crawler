@@ -20,9 +20,9 @@
 
 2. 터미널에서 selenium과 pymysql을 설치한다.
 
-  - pip install selenium
+    - pip install selenium
 
-  - pip install pymysql
+    - pip install pymysql
 
 3. 크롬드라이버를 C:\ChromeDriver에 chromedriver라는 이름으로 둔다.
 
