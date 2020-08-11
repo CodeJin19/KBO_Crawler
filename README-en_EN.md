@@ -1,10 +1,10 @@
 # KBO_Crawler
 
-[KBO 기록실](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx)의 Data를 DB화하는 프로그램.
+[Korean](./README.md) | [English](./README-en_EN.md)
 
 Crawls the data from [KBO Records](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx) and databasize at MySQL.
 
-## 필요 프로그램 Requirement
+## Requirement
 
 - Python
 
@@ -14,23 +14,23 @@ Crawls the data from [KBO Records](https://www.koreabaseball.com/Record/Player/H
 
 - Chrome Driver
 
-## 설치 Installation
+## Installation
 
-1. 코드를 다운받는다.
+1. get main.py from this repository
 
-2. 터미널에서 selenium과 pymysql을 설치한다.
+2. install selenium and pymysql at terminal
 
   - pip install selenium
 
   - pip install pymysql
 
-3. 크롬드라이버를 C:\ChromeDriver에 chromedriver라는 이름으로 둔다.
+3. put chromedriver as chromedriver at C:\ChromeDriver
 
-4. MySQL에 sample db를 만든다.
+4. make sample db in MySQL
 
-5. main.py를 실행한다.
+5. run main.py
 
-## 개발 기록 Development Log
+## Development Log
 
 - 2020.08.05 Hitter : multi years crawling
 
