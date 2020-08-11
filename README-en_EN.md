@@ -20,9 +20,9 @@ Crawls the data from [KBO Records](https://www.koreabaseball.com/Record/Player/H
 
 2. install selenium and pymysql at terminal
 
-    - pip install selenium
+  - pip install selenium
 
-    - pip install pymysql
+  - pip install pymysql
 
 3. put chromedriver as chromedriver at C:\ChromeDriver
 
