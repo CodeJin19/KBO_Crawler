@@ -1,10 +1,10 @@
 # KBO_Crawler
 
+[Korean](./README.md) | [English](./README-en_EN.md)
+
 [KBO 기록실](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx)의 Data를 DB화하는 프로그램.
 
-Crawls the data from [KBO Records](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx) and databasize at MySQL.
-
-## 필요 프로그램 Requirement
+## 필요 프로그램
 
 - Python
 
@@ -14,9 +14,9 @@ Crawls the data from [KBO Records](https://www.koreabaseball.com/Record/Player/H
 
 - Chrome Driver
 
-## 설치 Installation
+## 설치
 
-1. 코드를 다운받는다.
+1. main.py를 다운받는다.
 
 2. 터미널에서 selenium과 pymysql을 설치한다.
 
@@ -30,7 +30,7 @@ Crawls the data from [KBO Records](https://www.koreabaseball.com/Record/Player/H
 
 5. main.py를 실행한다.
 
-## 개발 기록 Development Log
+## 개발 기록
 
 - 2020.08.05 Hitter : multi years crawling
 
