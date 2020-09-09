@@ -5,6 +5,8 @@ from make_csv import generate
 
 if __name__ == "__main__":
 
+    generate()
+"""
     choice = 0
 
     while choice != 4:
@@ -31,3 +33,4 @@ if __name__ == "__main__":
             generate()
         elif choice != 5:
             print("다시 입력해주세요")
+"""
