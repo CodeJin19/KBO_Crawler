@@ -407,7 +407,7 @@ def crawling():
     options.add_argument('window-size=1920x1080')
     options.add_argument('--disable-gpu')
 
-    driver = webdriver.Chrome('C:\ChromeDriver\chromedriver', chrome_options=options)
+    driver = webdriver.Chrome('C:\ChromeDriver\chromedriver', options=options)
     #driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
     time.sleep(2)
 
