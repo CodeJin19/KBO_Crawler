@@ -33,6 +33,28 @@ import pymysql
     20 : OB LT SS HH    HT LG SK WO NC KT
  """
 
+def setYear(yearValue, driver):
+    option = driver.find_element_by_xpath("//*[@id='contents']/div[2]/ul/li[2]/img")
+    option.click()
+    time.sleep(2)
+
+    year = driver.find_element_by_xpath(
+        "//*[@id='ui-datepicker-div']/div/div/select[2]/option[@value='" + str(yearValue) + "']")
+    year.click()
+
+    if yearValue == 2010: #2010.03.27
+        month = driver.find_element_by_xpath(
+            "//*[@id='ui-datepicker-div']/div/div/select[1]/option[@value='" + str(2) + "']")
+        month.click()
+
+        time.sleep(2)
+
+        day = driver.find_element_by_xpath(
+            "//*[@id='ui-datepicker-div']/table/tbody/tr[" + str(4) + "]/td[" + str(7) + "]/a")
+        day.click()
+    elif yearValue == 2011:
+        print("Hi")
+
 def crawling(f) :
     writer = csv.writer(f)
     writer.writerow(['a', 'b', 'c'])
@@ -51,33 +73,15 @@ def crawling(f) :
         driver.get('https://www.koreabaseball.com/Schedule/GameCenter/Main.aspx')
         time.sleep(2)
 
-#------------------------------------------------------------------
+        for year in range(yearFrom, (yearTo + 1)):
+            setYear(year, driver)
 
-        option = driver.find_element_by_xpath("//*[@id='contents']/div[2]/ul/li[2]/img")
-        option.click()
-        time.sleep(2)
+            game_list = driver.find_element_by_xpath("//*[@id='contents']/div[3]/div/div[1]/ul")
+            games = game_list.find_elements_by_tag_name("li")
 
-        month = driver.find_element_by_xpath(
-            "//*[@id='ui-datepicker-div']/div/div/select[1]/option[@value='" + str(4) + "']")
-        month.click()
+            for game in games:
+                print(game.text)
 
-        year = driver.find_element_by_xpath(
-            "//*[@id='ui-datepicker-div']/div/div/select[2]/option[@value='" + str(yearFrom) + "']")
-        year.click()
-
-        time.sleep(2)
-
-        day = driver.find_element_by_xpath(
-            "//*[@id='ui-datepicker-div']/table/tbody/tr[" + str(3) + "]/td[" + str(6) + "]/a")
-        day.click()
-            #//*[@id="ui-datepicker-div"]/table/tbody/tr[1]/td[7]
-            #//*[@id="ui-datepicker-div"]/table/tbody/tr[1]/td[7]/a
-            #//*[@id="ui-datepicker-div"]/table/tbody/tr[2]/td[4]
-            #//*[@id="ui-datepicker-div"]/table/tbody/tr[2]/td[4]/a
-        x = input()
-
-#------------------------------------------------------------------
-    
     except BaseException as e:
         print("----------------------------------")
         print("error :")
@@ -96,6 +100,7 @@ def crawling(f) :
 
     driver = webdriver.Chrome('C:\ChromeDriver\chromedriver', options=options)
 """
+
 def generate() :
     f = open('KBO_data.csv', 'wt', encoding='utf-8', newline="")
 
