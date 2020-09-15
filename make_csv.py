@@ -80,7 +80,16 @@ def crawling(f) :
             games = game_list.find_elements_by_tag_name("li")
 
             for game in games:
-                print(game.text)
+                game.click()
+                time.sleep(2)
+
+                # id = lblHomePitcher
+
+                #lblAwayHitter
+
+                # id = lblAwayPitcher
+
+                #lblHomeHitter
 
     except BaseException as e:
         print("----------------------------------")
