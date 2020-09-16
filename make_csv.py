@@ -83,11 +83,21 @@ def crawling(f) :
                 game.click()
                 time.sleep(2)
 
+                pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
+                lines = pitcherTable.find_elements_by_tag_name("tr");
+
+                for line in lines:
+                    name = line.text.split(' ')[0]
+
                 # id = lblHomePitcher
+                #//*[@id="tblHomePitcher"]
+                #//*[@id="tblHomePitcher"]/tbody/tr[1]/td[1]
 
                 #lblAwayHitter
 
                 # id = lblAwayPitcher
+                #//*[@id="tblAwayPitcher"]/tbody/tr[1]/td[1]
+                #//*[@id="tblAwayPitcher"]/tbody/tr[2]/td[1]
 
                 #lblHomeHitter
 

@@ -22,7 +22,7 @@ def pitcher(driver, yearFrom, yearTo, teamList):
             table[i].append('a')
 
     for year in range(yearFrom, (yearTo + 1)):
-        setYear(year, driver)
+        setYear.setYear(year, driver)
 
         for team in teamList:
             if year < 2008:
@@ -38,7 +38,7 @@ def pitcher(driver, yearFrom, yearTo, teamList):
                 if team == 'HD':
                     continue
 
-            setTeam(team, driver)
+            setTeam.setTeam(team, driver)
             lineTo = 20
 
             if year == 2013 and team == 'WO':

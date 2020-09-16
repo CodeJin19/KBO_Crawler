@@ -22,7 +22,7 @@ def runner(driver, yearFrom, yearTo, teamList):
             table[i].append('a')
 
     for year in range(yearFrom, (yearTo + 1)):
-        setYear(year, driver)
+        setYear.setYear(year, driver)
         time.sleep(2)
 
         for team in teamList:
@@ -39,7 +39,7 @@ def runner(driver, yearFrom, yearTo, teamList):
                 if team == 'HD':
                     continue
 
-            setTeam(team, driver)
+            setTeam.setTeam(team, driver)
 
             for line in range(1, 21):
                 table[line - 1][0] = year

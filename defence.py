@@ -22,7 +22,7 @@ def defence(driver, yearFrom, yearTo, teamList):
             table[i].append('a')
 
     for year in range(yearFrom, (yearTo + 1)):
-        setYear(year, driver)
+        setYear.setYear(year, driver)
 
         for team in teamList:
             if year < 2008:
@@ -38,7 +38,7 @@ def defence(driver, yearFrom, yearTo, teamList):
                 if team == 'HD':
                     continue
 
-            setTeam(team, driver)
+            setTeam.setTeam(team, driver)
 
             for line in range(1, 21):
                 table[line - 1][0] = year
