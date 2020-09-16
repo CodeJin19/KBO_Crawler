@@ -1,7 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import csv
 import time
 import pymysql
@@ -56,9 +53,6 @@ def setYear(yearValue, driver):
         print("Hi")
 
 def crawling(f) :
-    writer = csv.writer(f)
-    writer.writerow(['a', 'b', 'c'])
-
     # print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
     yearFrom = 2010
     # print("몇 년도까지 크롤링할 지 입력하세요 (최대 2019) YYYY: ")
@@ -79,15 +73,48 @@ def crawling(f) :
             game_list = driver.find_element_by_xpath("//*[@id='contents']/div[3]/div/div[1]/ul")
             games = game_list.find_elements_by_tag_name("li")
 
+            table = []
+            tmp = []
+
+            passwd = input("비번을 입력하세요 : ")
+            conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
+            cur = conn.cursor()
+
             for game in games:
                 game.click()
                 time.sleep(2)
+
+                table.clear()
+                tmp.clear()
 
                 pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
                 lines = pitcherTable.find_elements_by_tag_name("tr");
 
                 for line in lines:
                     name = line.text.split(' ')[0]
+
+                    if name != "선수명" and name != "TOTAL":
+                        sql = "SELECT * FROM pitcherdb WHERE name=%s and year=%s"
+                        cur.execute(sql, (name, year))
+
+                        rows = cur.fetchall()
+
+                        for row in rows:
+                            table.append([])
+                            for i in range(5, 20):
+                                tmp.append(row[i])
+
+                            table.append(tmp)
+
+                # sql = """insert into pitcherdb
+                #                       (name, teamName, year, era, g, w, l, sv, hld, wpct, ip, h, hr, bb, hbp, so, r, er, whip)
+                #                       values('%s', '%s', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%f', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%f')
+                #                       """ % (
+                # name, teamname, yearVal, era, g, w, l, sv, hld, wpct, ip, h, hr, bb, hbp, so, r, er, whip)
+
+                # writer = csv.writer(f)
+                # writer.writerow(['a', 'b', 'c'])
+
 
                 # id = lblHomePitcher
                 #//*[@id="tblHomePitcher"]
