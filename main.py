@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     choice = 0
 
-    while choice != 4:
+    while choice != 5:
         print("1. 필요 패키지 설명")
         print("2. DB 세팅")
         print("3. Crawling 실행")
@@ -51,9 +51,9 @@ if __name__ == "__main__":
             print("3. pymysql")
             print("------------------------\n")
         elif choice == 2:
-            setDB()
+            setDB.setDB()
         elif choice == 3:
-            crawling()
+            crawling.crawling()
         elif choice == 4:
             generate()
         elif choice != 5:
