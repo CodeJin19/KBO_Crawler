@@ -62,6 +62,8 @@ def crawling(f) :
     driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
     time.sleep(2)
 
+    writer = csv.writer(f)
+
     try:
         # 웹페이지 연결
         driver.get('https://www.koreabaseball.com/Schedule/GameCenter/Main.aspx')
@@ -85,7 +87,6 @@ def crawling(f) :
                 time.sleep(2)
 
                 table.clear()
-                tmp.clear()
 
                 pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
                 lines = pitcherTable.find_elements_by_tag_name("tr");
@@ -96,24 +97,37 @@ def crawling(f) :
                     if name != "선수명" and name != "TOTAL":
                         sql = "SELECT * FROM pitcherdb WHERE name=%s and year=%s"
                         cur.execute(sql, (name, year))
-
                         rows = cur.fetchall()
 
+                        tmp.clear()
+
                         for row in rows:
-                            table.append([])
                             for i in range(5, 20):
                                 tmp.append(row[i])
 
                             table.append(tmp)
 
-                # sql = """insert into pitcherdb
-                #                       (name, teamName, year, era, g, w, l, sv, hld, wpct, ip, h, hr, bb, hbp, so, r, er, whip)
-                #                       values('%s', '%s', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%f', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%f')
-                #                       """ % (
-                # name, teamname, yearVal, era, g, w, l, sv, hld, wpct, ip, h, hr, bb, hbp, so, r, er, whip)
+                        print("---tmp---")
 
-                # writer = csv.writer(f)
-                # writer.writerow(['a', 'b', 'c'])
+                        for i in range(len(tmp)):
+                            print(str(tmp[i]) + " ", end='')
+                        print()
+
+                        print("after " + str(name) + " added")
+
+                        for i in range(len(table)):
+                            for j in range(len(table[i])):
+                                print(str(table[i][j]) + " ", end='')
+                            print()
+
+                        x = input()
+
+                print("len(table[1]) : " + str(len(table[1])))
+                x = input()
+
+
+
+                # writer.writerow(tmp)
 
 
                 # id = lblHomePitcher
@@ -149,6 +163,9 @@ def crawling(f) :
 
 def generate() :
     f = open('KBO_data.csv', 'wt', encoding='utf-8', newline="")
+
+    writer = csv.writer(f)
+    writer.writerow(['g', 'w', 'l', 'sv', 'hld', 'wpct', 'ip', 'h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip'])
 
     crawling(f)
 
