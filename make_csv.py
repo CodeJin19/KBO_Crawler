@@ -105,7 +105,7 @@ def crawling(f) :
                             for i in range(5, 20):
                                 tmp.append(row[i])
 
-                            table.append(tmp)
+                            table.append(tmp.copy())
 
                         print("---tmp---")
 
