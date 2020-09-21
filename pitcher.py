@@ -72,6 +72,10 @@ def pitcher(driver, yearFrom, yearTo, teamList):
                     wpct = 0
                 else:
                     wpct = float(table[line][10])
+                if '/' in table[line][11]:
+                    ip = int(table[line][11].split(" ")[0]) + float(int(table[line][11].split(" ")[1].split("/")[0]) / int(table[line][11].split(" ")[1].split("/")[1]))
+                else:
+                    ip = float(table[line][11])
                 if table[line][19] == '-':
                     whip = 0
                 else:
@@ -84,7 +88,6 @@ def pitcher(driver, yearFrom, yearTo, teamList):
                 l = int(table[line][7])
                 sv = int(table[line][8])
                 hld = int(table[line][9])
-                ip = str(table[line][11])
                 h = int(table[line][12])
                 hr = int(table[line][13])
                 bb = int(table[line][14])
@@ -95,7 +98,7 @@ def pitcher(driver, yearFrom, yearTo, teamList):
 
                 sql = """insert into pitcherdb
                       (name, teamName, year, era, g, w, l, sv, hld, wpct, ip, h, hr, bb, hbp, so, r, er, whip)
-                      values('%s', '%s', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%f', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%f')
+                      values('%s', '%s', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%f', '%f', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%f')
                       """ % (name, teamname, yearVal, era, g, w, l, sv, hld, wpct, ip, h, hr, bb, hbp, so, r, er, whip)
 
                 cur.execute(sql)

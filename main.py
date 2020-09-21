@@ -32,7 +32,6 @@ import crawling
  """
 
 if __name__ == "__main__":
-
     choice = 0
 
     while choice != 5:
