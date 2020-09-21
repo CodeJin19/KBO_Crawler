@@ -86,7 +86,10 @@ def crawling(f) :
                 game.click()
                 time.sleep(2)
 
+                # ------------------------- lblHomePitcher
+
                 table.clear()
+                cnt = 0
 
                 pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
                 lines = pitcherTable.find_elements_by_tag_name("tr");
@@ -99,36 +102,39 @@ def crawling(f) :
                         cur.execute(sql, (name, year))
                         rows = cur.fetchall()
 
-                        tmp.clear()
-
                         for row in rows:
+                            tmp.clear()
+                            cnt += 1
+
                             for i in range(5, 20):
-                                tmp.append(row[i])
+                                if i != 11:
+                                    tmp.append(row[i])
 
                             table.append(tmp.copy())
 
-                        print("---tmp---")
+                for i in range(len(table)):
+                    for j in range(len(table[i])):
+                        print(str(table[i][j]) + " ", end='')
+                    print()
 
-                        for i in range(len(tmp)):
-                            print(str(tmp[i]) + " ", end='')
-                        print()
+                tmp.clear()
 
-                        print("after " + str(name) + " added")
+                for j in range(len(table[0])):
+                    sum = 0
 
-                        for i in range(len(table)):
-                            for j in range(len(table[i])):
-                                print(str(table[i][j]) + " ", end='')
-                            print()
+                    for i in range(len(table)):
+                        sum += float(table[i][j])
 
-                        x = input()
+                    avg = sum / cnt
+                    tmp.append(avg)
 
-                print("len(table[1]) : " + str(len(table[1])))
+                writer.writerow(tmp)
+
+                for i in range(len(tmp)):
+                    print(str(tmp[i]) + " ", end='')
+                print()
+
                 x = input()
-
-
-
-                # writer.writerow(tmp)
-
 
                 # id = lblHomePitcher
                 #//*[@id="tblHomePitcher"]
@@ -165,7 +171,7 @@ def generate() :
     f = open('KBO_data.csv', 'wt', encoding='utf-8', newline="")
 
     writer = csv.writer(f)
-    writer.writerow(['g', 'w', 'l', 'sv', 'hld', 'wpct', 'ip', 'h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip'])
+    writer.writerow(['g', 'w', 'l', 'sv', 'hld', 'wpct', 'h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip'])
 
     crawling(f)
 
