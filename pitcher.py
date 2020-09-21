@@ -72,10 +72,13 @@ def pitcher(driver, yearFrom, yearTo, teamList):
                     wpct = 0
                 else:
                     wpct = float(table[line][10])
-                if '/' in table[line][11]:
+                if ' ' in table[line][11]:
                     ip = int(table[line][11].split(" ")[0]) + float(int(table[line][11].split(" ")[1].split("/")[0]) / int(table[line][11].split(" ")[1].split("/")[1]))
                 else:
-                    ip = float(table[line][11])
+                    if '/' in table[line][11]:
+                        ip = 0 + float(int(table[line][11].split("/")[0]) / int(table[line][11].split("/")[1]))
+                    else:
+                        ip = float(table[line][11])
                 if table[line][19] == '-':
                     whip = 0
                 else:
