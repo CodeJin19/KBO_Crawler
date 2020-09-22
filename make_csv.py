@@ -62,7 +62,7 @@ def crawling(f) :
     driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
     time.sleep(2)
 
-    writer = csv.writer(f)
+    wr = csv.writer(f)
 
     try:
         # 웹페이지 연결
@@ -77,6 +77,7 @@ def crawling(f) :
 
             table = []
             tmp = []
+            actual = []
 
             passwd = input("비번을 입력하세요 : ")
             conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
@@ -86,10 +87,15 @@ def crawling(f) :
                 game.click()
                 time.sleep(2)
 
-                # ------------------------- lblHomePitcher
+                awayScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[1]/td[1]")
+                homeScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[2]/td[1]")
 
+                # lblHomePitcher --------------------------------------------------------------------
+                actual.clear()
                 table.clear()
                 cnt = 0
+
+                actual.append(awayScore.text)
 
                 pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
                 lines = pitcherTable.find_elements_by_tag_name("tr");
@@ -106,16 +112,10 @@ def crawling(f) :
                             tmp.clear()
                             cnt += 1
 
-                            for i in range(5, 20):
-                                if i != 11:
-                                    tmp.append(row[i])
+                            for i in range(4, 20):
+                                tmp.append(row[i])
 
                             table.append(tmp.copy())
-
-                for i in range(len(table)):
-                    for j in range(len(table[i])):
-                        print(str(table[i][j]) + " ", end='')
-                    print()
 
                 tmp.clear()
 
@@ -127,20 +127,34 @@ def crawling(f) :
 
                     avg = sum / cnt
                     tmp.append(avg)
+                    actual.append(avg)
 
-                writer.writerow(tmp)
+                wr.writerow(actual)
 
-                for i in range(len(tmp)):
-                    print(str(tmp[i]) + " ", end='')
+                # lblAwayHitter --------------------------------------------------------------------
+                table.clear()
+                cnt = 0
+
+                hitterTable = driver.find_element_by_xpath("//*[@id='tblAwayHitter1']/tbody")
+                lines = hitterTable.find_elements_by_tag_name("tr");
+
+                idx = 0
+
+                for line in lines:
+                    name = line.text.split(' ')[2]
+                    idx += 1
+
+                    records = driver.find_element_by_xpath("//*[@id='tblAwayHitter2']/table/tbody/tr[" + str(idx) + "]").text
+                    records = records.split(' ')
+
+                    for record in records:
+                        if record != "":
+                            table.append(name)
+                            break
+
+                for i in range(len(table)):
+                    print(table[i])
                 print()
-
-                x = input()
-
-                # id = lblHomePitcher
-                #//*[@id="tblHomePitcher"]
-                #//*[@id="tblHomePitcher"]/tbody/tr[1]/td[1]
-
-                #lblAwayHitter
 
                 # id = lblAwayPitcher
                 #//*[@id="tblAwayPitcher"]/tbody/tr[1]/td[1]
@@ -168,10 +182,10 @@ def crawling(f) :
 """
 
 def generate() :
-    f = open('KBO_data.csv', 'wt', encoding='utf-8', newline="")
+    f = open('KBO_data.csv', 'w', encoding='utf-8', newline="")
 
-    writer = csv.writer(f)
-    writer.writerow(['g', 'w', 'l', 'sv', 'hld', 'wpct', 'h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip'])
+    wr = csv.writer(f)
+    wr.writerow(['score', 'era', 'g', 'w', 'l', 'sv', 'hld', 'wpct', 'ip','h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip'])
 
     crawling(f)
 

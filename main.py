@@ -32,6 +32,57 @@ import crawling
  """
 
 if __name__ == "__main__":
+    """
+    table = []
+    tmp = []
+
+    tmp.append(1)
+    tmp.append(2)
+
+    table.append(tmp.copy())
+
+    tmp.clear()
+    tmp.append(3)
+    tmp.append(4)
+
+    table.append(tmp.copy())
+
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            print(str(table[i][j]) + " ", end='')
+        print()
+
+    tmp.clear()
+    tmp.append(5)
+    tmp.append(6)
+
+    table.append(tmp.copy())
+
+    for i in range(len(tmp)):
+        table[0].append((tmp[i]))
+
+    print("-----------------------------")
+
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            print(str(table[i][j]) + " ", end='')
+        print()
+
+    tmp.clear()
+    tmp.append(7)
+    tmp.append(8)
+
+    for i in range(len(tmp)):
+        table[0].append((tmp[i]))
+
+    print("-----------------------------")
+
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            print(str(table[i][j]) + " ", end='')
+        print()
+
+    """
     choice = 0
 
     while choice != 5:
