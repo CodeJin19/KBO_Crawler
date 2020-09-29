@@ -88,14 +88,12 @@ def crawling(f) :
                 time.sleep(2)
 
                 awayScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[1]/td[1]")
-                homeScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[2]/td[1]")
+                actual.append(awayScore.text)
 
                 # lblHomePitcher --------------------------------------------------------------------
                 actual.clear()
                 table.clear()
                 cnt = 0
-
-                actual.append(awayScore.text)
 
                 pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
                 lines = pitcherTable.find_elements_by_tag_name("tr");
@@ -129,7 +127,7 @@ def crawling(f) :
                     tmp.append(avg)
                     actual.append(avg)
 
-                wr.writerow(actual)
+                # wr.writerow(actual)
 
                 # lblAwayHitter --------------------------------------------------------------------
                 table.clear()
@@ -149,12 +147,35 @@ def crawling(f) :
 
                     for record in records:
                         if record != "":
-                            table.append(name)
+                            sql = "SELECT * FROM hitterdb WHERE name=%s and year=%s"
+                            cur.execute(sql, (name, year))
+                            rows = cur.fetchall()
+
+                            for row in rows:
+                                tmp.clear()
+                                cnt += 1
+
+                                for i in range(4, 17):
+                                    tmp.append(row[i])
+
+                                table.append(tmp.copy())
                             break
 
-                for i in range(len(table)):
-                    print(table[i])
-                print()
+                tmp.clear()
+
+                for j in range(len(table[0])):
+                    sum = 0
+
+                    for i in range(len(table)):
+                        sum += float(table[i][j])
+
+                    avg = sum / cnt
+                    tmp.append(avg)
+                    actual.append(avg)
+
+                wr.writerow(actual)
+
+                homeScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[2]/td[1]")
 
                 # id = lblAwayPitcher
                 #//*[@id="tblAwayPitcher"]/tbody/tr[1]/td[1]
@@ -185,7 +206,7 @@ def generate() :
     f = open('KBO_data.csv', 'w', encoding='utf-8', newline="")
 
     wr = csv.writer(f)
-    wr.writerow(['score', 'era', 'g', 'w', 'l', 'sv', 'hld', 'wpct', 'ip','h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip'])
+    wr.writerow(['score', 'era', 'g', 'w', 'l', 'sv', 'hld', 'wpct', 'ip','h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip', 'avg', 'g', 'pa', 'ab', 'r', 'h', '2b', '3b', 'hr', 'tb', 'rbi', 'sac', 'sf'])
 
     crawling(f)
 
