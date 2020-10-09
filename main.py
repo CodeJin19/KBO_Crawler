@@ -1,6 +1,6 @@
 #selenium 패키지 설치 terminal -> pip install selenium
 #pymysql 패키지 설치 terminal -> pip install pymysql
-from make_csv import generate
+import generator
 import setDB
 import crawling
 
@@ -32,57 +32,6 @@ import crawling
  """
 
 if __name__ == "__main__":
-    """
-    table = []
-    tmp = []
-
-    tmp.append(1)
-    tmp.append(2)
-
-    table.append(tmp.copy())
-
-    tmp.clear()
-    tmp.append(3)
-    tmp.append(4)
-
-    table.append(tmp.copy())
-
-    for i in range(len(table)):
-        for j in range(len(table[i])):
-            print(str(table[i][j]) + " ", end='')
-        print()
-
-    tmp.clear()
-    tmp.append(5)
-    tmp.append(6)
-
-    table.append(tmp.copy())
-
-    for i in range(len(tmp)):
-        table[0].append((tmp[i]))
-
-    print("-----------------------------")
-
-    for i in range(len(table)):
-        for j in range(len(table[i])):
-            print(str(table[i][j]) + " ", end='')
-        print()
-
-    tmp.clear()
-    tmp.append(7)
-    tmp.append(8)
-
-    for i in range(len(tmp)):
-        table[0].append((tmp[i]))
-
-    print("-----------------------------")
-
-    for i in range(len(table)):
-        for j in range(len(table[i])):
-            print(str(table[i][j]) + " ", end='')
-        print()
-
-    """
     choice = 0
 
     while choice != 5:
@@ -105,6 +54,6 @@ if __name__ == "__main__":
         elif choice == 3:
             crawling.crawling()
         elif choice == 4:
-            generate()
+            generator.generate()
         elif choice != 5:
             print("다시 입력해주세요")

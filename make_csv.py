@@ -72,6 +72,20 @@ def crawling(f) :
         for year in range(yearFrom, (yearTo + 1)):
             setYear(year, driver)
 
+            date = driver.find_element_by_xpath("//*[@id='lblGameDate']")
+            dateString = date.text
+            dateString = dateString[0:10]
+
+            while dateString != "2010.04.06":
+                bttn = driver.find_element_by_xpath("//*[@id='lnkNext']")
+                bttn.click()
+
+                date = driver.find_element_by_xpath("//*[@id='lblGameDate']")
+                dateString = date.text
+                dateString = dateString[0:10]
+
+            """
+
             game_list = driver.find_element_by_xpath("//*[@id='contents']/div[3]/div/div[1]/ul")
             games = game_list.find_elements_by_tag_name("li")
 
@@ -259,6 +273,7 @@ def crawling(f) :
                     actual.append(avg)
 
                 wr.writerow(actual)
+            """
 
     except BaseException as e:
         print("----------------------------------")
@@ -278,13 +293,3 @@ def crawling(f) :
 
     driver = webdriver.Chrome('C:\ChromeDriver\chromedriver', options=options)
 """
-
-def generate() :
-    f = open('KBO_data.csv', 'w', encoding='utf-8', newline="")
-
-    wr = csv.writer(f)
-    wr.writerow(['score', 'era', 'g', 'w', 'l', 'sv', 'hld', 'wpct', 'ip','h', 'hr', 'bb', 'hbp', 'so', 'r', 'er', 'whip', 'avg', 'g', 'pa', 'ab', 'r', 'h', '2b', '3b', 'hr', 'tb', 'rbi', 'sac', 'sf'])
-
-    crawling(f)
-
-    f.close()
