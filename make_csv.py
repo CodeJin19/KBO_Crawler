@@ -49,20 +49,215 @@ def setYear(yearValue, driver):
         day = driver.find_element_by_xpath(
             "//*[@id='ui-datepicker-div']/table/tbody/tr[" + str(4) + "]/td[" + str(7) + "]/a")
         day.click()
-    elif yearValue == 2011:
+    else: #todo : set other years
         print("Hi")
 
-def crawling(f) :
+def crawling(f, driver, conn, year):
+    wr = csv.writer(f)
+
+    game_list = driver.find_element_by_xpath("//*[@id='contents']/div[3]/div/div[1]/ul")
+    games = game_list.find_elements_by_tag_name("li")
+
+    table = []
+    tmp = []
+    actual = []
+
+    cur = conn.cursor()
+
+    for game in games:
+        isDone = game.find_element_by_class_name("time")
+
+
+        if isDone.text != "경기종료":
+            continue
+
+        game.click()
+        time.sleep(2)
+
+        awayScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[1]/td[1]")
+        actual.clear()
+        actual.append(awayScore.text)
+
+        # lblHomePitcher --------------------------------------------------------------------
+        table.clear()
+        cnt = 0
+
+        pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
+        lines = pitcherTable.find_elements_by_tag_name("tr");
+
+        for line in lines:
+            name = line.text.split(' ')[0]
+
+            if name != "선수명" and name != "TOTAL":
+                sql = "SELECT * FROM pitcherdb WHERE name=%s and year=%s"
+                cur.execute(sql, (name, year))
+                rows = cur.fetchall()
+
+                for row in rows:
+                    tmp.clear()
+                    cnt += 1
+
+                    for i in range(4, 20):
+                        tmp.append(row[i])
+
+                    table.append(tmp.copy())
+
+        tmp.clear()
+
+        for j in range(len(table[0])):
+            sum = 0
+
+            for i in range(len(table)):
+                sum += float(table[i][j])
+
+            avg = sum / cnt
+            tmp.append(avg)
+            actual.append(avg)
+
+        # lblAwayHitter --------------------------------------------------------------------
+        table.clear()
+        cnt = 0
+
+        hitterTable = driver.find_element_by_xpath("//*[@id='tblAwayHitter1']/tbody")
+        lines = hitterTable.find_elements_by_tag_name("tr");
+
+        idx = 0
+
+        for line in lines:
+            name = line.text.split(' ')[2]
+            idx += 1
+
+            records = driver.find_element_by_xpath("//*[@id='tblAwayHitter2']/table/tbody/tr[" + str(idx) + "]").text
+            records = records.split(' ')
+
+            for record in records:
+                if record != "":
+                    sql = "SELECT * FROM hitterdb WHERE name=%s and year=%s"
+                    cur.execute(sql, (name, year))
+                    rows = cur.fetchall()
+
+                    for row in rows:
+                        tmp.clear()
+                        cnt += 1
+
+                        for i in range(4, 17):
+                            tmp.append(row[i])
+
+                        table.append(tmp.copy())
+                    break
+
+        tmp.clear()
+
+        for j in range(len(table[0])):
+            sum = 0
+
+            for i in range(len(table)):
+                sum += float(table[i][j])
+
+            avg = sum / cnt
+            tmp.append(avg)
+            actual.append(avg)
+
+        wr.writerow(actual)
+        actual.clear()
+
+        homeScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[2]/td[1]")
+        actual.append(homeScore.text)
+
+        # lblAwayPitcher --------------------------------------------------------------------
+        table.clear()
+        cnt = 0
+
+        pitcherTable = driver.find_element_by_xpath("//*[@id='tblAwayPitcher']")
+        lines = pitcherTable.find_elements_by_tag_name("tr");
+
+        for line in lines:
+            name = line.text.split(' ')[0]
+
+            if name != "선수명" and name != "TOTAL":
+                sql = "SELECT * FROM pitcherdb WHERE name=%s and year=%s"
+                cur.execute(sql, (name, year))
+                rows = cur.fetchall()
+
+                for row in rows:
+                    tmp.clear()
+                    cnt += 1
+
+                    for i in range(4, 20):
+                        tmp.append(row[i])
+
+                    table.append(tmp.copy())
+
+        tmp.clear()
+
+        for j in range(len(table[0])):
+            sum = 0
+
+            for i in range(len(table)):
+                sum += float(table[i][j])
+
+            avg = sum / cnt
+            tmp.append(avg)
+            actual.append(avg)
+
+        # lblHomeHitter --------------------------------------------------------------------
+        table.clear()
+        cnt = 0
+
+        hitterTable = driver.find_element_by_xpath("//*[@id='tblHomeHitter1']/tbody")
+        lines = hitterTable.find_elements_by_tag_name("tr");
+
+        idx = 0
+
+        for line in lines:
+            name = line.text.split(' ')[2]
+            idx += 1
+
+            records = driver.find_element_by_xpath(
+                "//*[@id='tblHomeHitter2']/table/tbody/tr[" + str(idx) + "]").text
+            records = records.split(' ')
+
+            for record in records:
+                if record != "":
+                    sql = "SELECT * FROM hitterdb WHERE name=%s and year=%s"
+                    cur.execute(sql, (name, year))
+                    rows = cur.fetchall()
+
+                    for row in rows:
+                        tmp.clear()
+                        cnt += 1
+
+                        for i in range(4, 17):
+                            tmp.append(row[i])
+
+                        table.append(tmp.copy())
+                    break
+
+        tmp.clear()
+
+        for j in range(len(table[0])):
+            sum = 0
+
+            for i in range(len(table)):
+                sum += float(table[i][j])
+
+            avg = sum / cnt
+            tmp.append(avg)
+            actual.append(avg)
+
+        wr.writerow(actual)
+
+def controler(f):
     # print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
     yearFrom = 2010
     # print("몇 년도까지 크롤링할 지 입력하세요 (최대 2019) YYYY: ")
     yearTo = 2010
-    teamList = ['OB', 'LT', 'SS', 'HH', 'HD', 'HT', 'LG', 'SK', 'WO', 'NC', 'KT']
+
+    passwd = input("비번을 입력하세요 : ")
+    conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
 
     driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
     time.sleep(2)
-
-    wr = csv.writer(f)
 
     try:
         # 웹페이지 연결
@@ -76,204 +271,20 @@ def crawling(f) :
             dateString = date.text
             dateString = dateString[0:10]
 
-            while dateString != "2010.04.06":
+            if year == 2010:
+                endDate = "2010.10.19"
+            else: #todo : set other years
+                print("hi")
+
+            while dateString != endDate:
+                crawling(f, driver, conn, year)
+
                 bttn = driver.find_element_by_xpath("//*[@id='lnkNext']")
                 bttn.click()
 
                 date = driver.find_element_by_xpath("//*[@id='lblGameDate']")
                 dateString = date.text
                 dateString = dateString[0:10]
-
-            """
-
-            game_list = driver.find_element_by_xpath("//*[@id='contents']/div[3]/div/div[1]/ul")
-            games = game_list.find_elements_by_tag_name("li")
-
-            table = []
-            tmp = []
-            actual = []
-
-            passwd = input("비번을 입력하세요 : ")
-            conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
-            cur = conn.cursor()
-
-            for game in games:
-                game.click()
-                time.sleep(2)
-
-                awayScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[1]/td[1]")
-                actual.clear()
-                actual.append(awayScore.text)
-
-                # lblHomePitcher --------------------------------------------------------------------
-                table.clear()
-                cnt = 0
-
-                pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
-                lines = pitcherTable.find_elements_by_tag_name("tr");
-
-                for line in lines:
-                    name = line.text.split(' ')[0]
-
-                    if name != "선수명" and name != "TOTAL":
-                        sql = "SELECT * FROM pitcherdb WHERE name=%s and year=%s"
-                        cur.execute(sql, (name, year))
-                        rows = cur.fetchall()
-
-                        for row in rows:
-                            tmp.clear()
-                            cnt += 1
-
-                            for i in range(4, 20):
-                                tmp.append(row[i])
-
-                            table.append(tmp.copy())
-
-                tmp.clear()
-
-                for j in range(len(table[0])):
-                    sum = 0
-
-                    for i in range(len(table)):
-                        sum += float(table[i][j])
-
-                    avg = sum / cnt
-                    tmp.append(avg)
-                    actual.append(avg)
-
-                # lblAwayHitter --------------------------------------------------------------------
-                table.clear()
-                cnt = 0
-
-                hitterTable = driver.find_element_by_xpath("//*[@id='tblAwayHitter1']/tbody")
-                lines = hitterTable.find_elements_by_tag_name("tr");
-
-                idx = 0
-
-                for line in lines:
-                    name = line.text.split(' ')[2]
-                    idx += 1
-
-                    records = driver.find_element_by_xpath("//*[@id='tblAwayHitter2']/table/tbody/tr[" + str(idx) + "]").text
-                    records = records.split(' ')
-
-                    for record in records:
-                        if record != "":
-                            sql = "SELECT * FROM hitterdb WHERE name=%s and year=%s"
-                            cur.execute(sql, (name, year))
-                            rows = cur.fetchall()
-
-                            for row in rows:
-                                tmp.clear()
-                                cnt += 1
-
-                                for i in range(4, 17):
-                                    tmp.append(row[i])
-
-                                table.append(tmp.copy())
-                            break
-
-                tmp.clear()
-
-                for j in range(len(table[0])):
-                    sum = 0
-
-                    for i in range(len(table)):
-                        sum += float(table[i][j])
-
-                    avg = sum / cnt
-                    tmp.append(avg)
-                    actual.append(avg)
-
-                wr.writerow(actual)
-                actual.clear()
-
-                homeScore = driver.find_element_by_xpath("//*[@id='tblScordboard3']/tbody/tr[2]/td[1]")
-                actual.append(homeScore.text)
-
-                # lblAwayPitcher --------------------------------------------------------------------
-                table.clear()
-                cnt = 0
-
-                pitcherTable = driver.find_element_by_xpath("//*[@id='tblAwayPitcher']")
-                lines = pitcherTable.find_elements_by_tag_name("tr");
-
-                for line in lines:
-                    name = line.text.split(' ')[0]
-
-                    if name != "선수명" and name != "TOTAL":
-                        sql = "SELECT * FROM pitcherdb WHERE name=%s and year=%s"
-                        cur.execute(sql, (name, year))
-                        rows = cur.fetchall()
-
-                        for row in rows:
-                            tmp.clear()
-                            cnt += 1
-
-                            for i in range(4, 20):
-                                tmp.append(row[i])
-
-                            table.append(tmp.copy())
-
-                tmp.clear()
-
-                for j in range(len(table[0])):
-                    sum = 0
-
-                    for i in range(len(table)):
-                        sum += float(table[i][j])
-
-                    avg = sum / cnt
-                    tmp.append(avg)
-                    actual.append(avg)
-
-                # lblHomeHitter --------------------------------------------------------------------
-                table.clear()
-                cnt = 0
-
-                hitterTable = driver.find_element_by_xpath("//*[@id='tblHomeHitter1']/tbody")
-                lines = hitterTable.find_elements_by_tag_name("tr");
-
-                idx = 0
-
-                for line in lines:
-                    name = line.text.split(' ')[2]
-                    idx += 1
-
-                    records = driver.find_element_by_xpath(
-                        "//*[@id='tblHomeHitter2']/table/tbody/tr[" + str(idx) + "]").text
-                    records = records.split(' ')
-
-                    for record in records:
-                        if record != "":
-                            sql = "SELECT * FROM hitterdb WHERE name=%s and year=%s"
-                            cur.execute(sql, (name, year))
-                            rows = cur.fetchall()
-
-                            for row in rows:
-                                tmp.clear()
-                                cnt += 1
-
-                                for i in range(4, 17):
-                                    tmp.append(row[i])
-
-                                table.append(tmp.copy())
-                            break
-
-                tmp.clear()
-
-                for j in range(len(table[0])):
-                    sum = 0
-
-                    for i in range(len(table)):
-                        sum += float(table[i][j])
-
-                    avg = sum / cnt
-                    tmp.append(avg)
-                    actual.append(avg)
-
-                wr.writerow(actual)
-            """
 
     except BaseException as e:
         print("----------------------------------")
