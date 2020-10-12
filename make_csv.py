@@ -49,6 +49,26 @@ def setYear(yearValue, driver):
         day = driver.find_element_by_xpath(
             "//*[@id='ui-datepicker-div']/table/tbody/tr[" + str(4) + "]/td[" + str(7) + "]/a")
         day.click()
+    elif yearValue == 2011: #2011.04.02
+        month = driver.find_element_by_xpath(
+            "//*[@id='ui-datepicker-div']/div/div/select[1]/option[@value='" + str(3) + "']")
+        month.click()
+
+        time.sleep(2)
+
+        day = driver.find_element_by_xpath(
+            "//*[@id='ui-datepicker-div']/table/tbody/tr[" + str(1) + "]/td[" + str(7) + "]/a")
+        day.click()
+    elif yearValue == 2012: #2012.04.07
+        month = driver.find_element_by_xpath(
+            "//*[@id='ui-datepicker-div']/div/div/select[1]/option[@value='" + str(3) + "']")
+        month.click()
+
+        time.sleep(2)
+
+        day = driver.find_element_by_xpath(
+            "//*[@id='ui-datepicker-div']/table/tbody/tr[" + str(1) + "]/td[" + str(7) + "]/a")
+        day.click()
     else: #todo : set other years
         print("Hi")
 
@@ -251,12 +271,19 @@ def controler(f):
     # print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
     yearFrom = 2010
     # print("몇 년도까지 크롤링할 지 입력하세요 (최대 2019) YYYY: ")
-    yearTo = 2010
+    yearTo = 2012
 
     passwd = input("비번을 입력하세요 : ")
     conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
 
-    driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
+    # driver = webdriver.Chrome('C:\ChromeDriver\chromedriver')
+
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_argument('window-size=1920x1080')
+    options.add_argument('--disable-gpu')
+
+    driver = webdriver.Chrome('C:\ChromeDriver\chromedriver', options=options)
     time.sleep(2)
 
     try:
@@ -272,11 +299,17 @@ def controler(f):
             dateString = dateString[0:10]
 
             if year == 2010:
-                endDate = "2010.10.19"
+                endDate = "2010.10.20"
+            elif year == 2011:
+                endDate = "2011.10.31"
+            elif year == 2012:
+                endDate = "2012.11.01"
             else: #todo : set other years
                 print("hi")
 
             while dateString != endDate:
+                print(dateString)
+
                 try:
                     crawling(f, driver, conn, year)
                 except BaseException as e:
