@@ -268,10 +268,10 @@ def crawling(f, driver, conn, year):
         wr.writerow(actual)
 
 def controler(f):
-    # print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
-    yearFrom = 2010
-    # print("몇 년도까지 크롤링할 지 입력하세요 (최대 2019) YYYY: ")
-    yearTo = 2012
+    print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
+    yearFrom = int(input())
+    print("몇 년도까지 크롤링할 지 입력하세요 (최대 2012) YYYY: ")
+    yearFrom = int(input())
 
     passwd = input("비번을 입력하세요 : ")
     conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
