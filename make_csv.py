@@ -271,7 +271,7 @@ def controler(f):
     print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
     yearFrom = int(input())
     print("몇 년도까지 크롤링할 지 입력하세요 (최대 2012) YYYY: ")
-    yearFrom = int(input())
+    yearTo = int(input())
 
     passwd = input("비번을 입력하세요 : ")
     conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
@@ -342,21 +342,16 @@ def controler(f):
 """
 """
 2010.04.09Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
-  (Session info: chrome=86.0.4240.75)
 
 2010.04.11Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
-  (Session info: chrome=86.0.4240.75)
 
 2010.06.06Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblHomeHitter2']/table/tbody/tr[1]"}
-  (Session info: chrome=86.0.4240.75)
 
 2010.07.24list index out of range
 
 2010.09.16Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblHomeHitter2']/table/tbody/tr[1]"}
-  (Session info: chrome=86.0.4240.75)
 
 2010.09.21list index out of range
 
 2010.10.13Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
-  (Session info: chrome=86.0.4240.75)
 """
