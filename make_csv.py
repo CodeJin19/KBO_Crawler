@@ -272,6 +272,7 @@ def controler(f):
     yearFrom = int(input())
     print("몇 년도까지 크롤링할 지 입력하세요 (최대 2012) YYYY: ")
     yearTo = int(input())
+    yearTo += 1
 
     passwd = input("비번을 입력하세요 : ")
     conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
@@ -291,23 +292,14 @@ def controler(f):
         driver.get('https://www.koreabaseball.com/Schedule/GameCenter/Main.aspx')
         time.sleep(2)
 
-        for year in range(yearFrom, (yearTo + 1)):
+        for year in range(yearFrom, yearTo):
             setYear(year, driver)
 
             date = driver.find_element_by_xpath("//*[@id='lblGameDate']")
             dateString = date.text
-            dateString = dateString[0:10]
+            yearString = dateString[0:4]
 
-            if year == 2010:
-                endDate = "2010.10.20"
-            elif year == 2011:
-                endDate = "2011.10.31"
-            elif year == 2012:
-                endDate = "2012.11.01"
-            else: #todo : set other years
-                print("hi")
-
-            while dateString != endDate:
+            while yearString != str(yearTo):
                 print(dateString)
 
                 try:
@@ -320,7 +312,8 @@ def controler(f):
 
                 date = driver.find_element_by_xpath("//*[@id='lblGameDate']")
                 dateString = date.text
-                dateString = dateString[0:10]
+                yearString = dateString[0:4]
+
 
     except BaseException as e:
         print("----------------------------------")
