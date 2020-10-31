@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 import setYear
 import setTeam
 import time
@@ -40,46 +41,60 @@ def hitter(driver, yearFrom, yearTo, teamList):
 
             setTeam.setTeam(team, driver)
 
-            for line in range(1, 21):
-                table[line - 1][0] = year
+            flag = True
+            page = 1
 
-                for idx in range(1, 17):
-                    try:
-                        data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
-                        table[line - 1][idx] = data.text
-                    except BaseException as e:
-                        data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
-                        table[line - 1][idx] = data.text
+            print(str(year) + " " + str(team))
 
-            for line in range(0, 20):
-                if table[line][4] == '-':
-                    avg = 0
+            while(flag):
+                hitterTable = driver.find_element_by_xpath("//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]")
+                lines = hitterTable.find_elements_by_tag_name("tr")
+
+                for i in range(len(lines)):
+                    if i != 0:
+                        tmp = lines[i].text.split(' ')
+
+                        if tmp[3] == '-':
+                            avg = 0
+                        else:
+                            avg = float(tmp[3])
+                        yearVal = int(year)
+                        name = str(tmp[1])
+                        teamname = str(tmp[2])
+                        g = int(tmp[4])
+                        pa = int(tmp[5])
+                        ab = int(tmp[6])
+                        r = int(tmp[7])
+                        h = int(tmp[8])
+                        b2 = int(tmp[9])
+                        b3 = int(tmp[10])
+                        hr = int(tmp[11])
+                        tb = int(tmp[12])
+                        rbi = int(tmp[13])
+                        sac = int(tmp[14])
+                        sf = int(tmp[15])
+
+                        sql = """insert into hitterdb
+                                          (name, teamName, year, avg, g, pa, ab, r, h, 2b, 3b, hr, tb, rbi, sac, sf)
+                                          values('%s', '%s', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d')
+                                          """ % (name, teamname, yearVal, avg, g, pa, ab, r, h, b2, b3, hr, tb, rbi, sac, sf)
+
+                        cur.execute(sql)
+                        conn.commit()
+
+                cnt = len(driver.find_elements_by_id("cphContents_cphContents_cphContents_ucPager_btnNo2"))
+
+                if 0 < cnt :
+                    if page == 1:
+                        driver.find_element_by_id("cphContents_cphContents_cphContents_ucPager_btnNo2").click()
+                        page = 2
+                        time.sleep(2)
+                        flag = True
+                    else:
+                        driver.find_element_by_id("cphContents_cphContents_cphContents_ucPager_btnNo1").click()
+                        page = 1
+                        time.sleep(2)
+                        flag = False
                 else:
-                    avg = float(table[line][4])
-                name = str(table[line][2])
-                teamname = str(table[line][3])
-                yearVal = int(table[line][0])
-                g = int(table[line][5])
-                pa = int(table[line][6])
-                ab = int(table[line][7])
-                r = int(table[line][8])
-                h = int(table[line][9])
-                b2 = int(table[line][10])
-                b3 = int(table[line][11])
-                hr = int(table[line][12])
-                tb = int(table[line][13])
-                rbi = int(table[line][14])
-                sac = int(table[line][15])
-                sf = int(table[line][16])
-
-                sql = """insert into hitterdb
-                      (name, teamName, year, avg, g, pa, ab, r, h, 2b, 3b, hr, tb, rbi, sac, sf)
-                      values('%s', '%s', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d')
-                      """ % (name, teamname, yearVal, avg, g, pa, ab, r, h, b2, b3, hr, tb, rbi, sac, sf)
-
-                cur.execute(sql)
-                conn.commit()
-
+                    flag = False
     conn.close()

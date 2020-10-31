@@ -29,9 +29,9 @@ def crawling():
         time.sleep(2)
 
         hitter.hitter(driver, yearFrom, yearTo, teamList)
-        pitcher.pitcher(driver, yearFrom, yearTo, teamList)
-        defence.defence(driver, yearFrom, yearTo, teamList)
-        runner.runner(driver, yearFrom, yearTo, teamList)
+        #pitcher.pitcher(driver, yearFrom, yearTo, teamList)
+        #defence.defence(driver, yearFrom, yearTo, teamList)
+        #runner.runner(driver, yearFrom, yearTo, teamList)
     except BaseException as e:
         print("----------------------------------")
         print("error :")

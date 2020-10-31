@@ -76,7 +76,7 @@ def crawling(f, driver, conn, year):
         cnt = 0
 
         pitcherTable = driver.find_element_by_xpath("//*[@id='tblHomePitcher']")
-        lines = pitcherTable.find_elements_by_tag_name("tr");
+        lines = pitcherTable.find_elements_by_tag_name("tr")
 
         for line in lines:
             name = line.text.split(' ')[0]
@@ -112,7 +112,7 @@ def crawling(f, driver, conn, year):
         cnt = 0
 
         hitterTable = driver.find_element_by_xpath("//*[@id='tblAwayHitter1']/tbody")
-        lines = hitterTable.find_elements_by_tag_name("tr");
+        lines = hitterTable.find_elements_by_tag_name("tr")
 
         idx = 0
 
@@ -162,7 +162,7 @@ def crawling(f, driver, conn, year):
         cnt = 0
 
         pitcherTable = driver.find_element_by_xpath("//*[@id='tblAwayPitcher']")
-        lines = pitcherTable.find_elements_by_tag_name("tr");
+        lines = pitcherTable.find_elements_by_tag_name("tr")
 
         for line in lines:
             name = line.text.split(' ')[0]
@@ -198,7 +198,7 @@ def crawling(f, driver, conn, year):
         cnt = 0
 
         hitterTable = driver.find_element_by_xpath("//*[@id='tblHomeHitter1']/tbody")
-        lines = hitterTable.find_elements_by_tag_name("tr");
+        lines = hitterTable.find_elements_by_tag_name("tr")
 
         idx = 0
 
