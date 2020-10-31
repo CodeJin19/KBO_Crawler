@@ -3,33 +3,6 @@ import csv
 import time
 import pymysql
 
-"""
-    00 : OB LT SS HH HD HT LG SK
-    01 : OB LT SS HH HD HT LG SK
-    02 : OB LT SS HH HD HT LG SK
-    03 : OB LT SS HH HD HT LG SK
-    04 : OB LT SS HH HD HT LG SK
-    05 : OB LT SS HH HD HT LG SK
-    06 : OB LT SS HH HD HT LG SK
-    07 : OB LT SS HH HD HT LG SK
-
-    08 : OB LT SS HH    HT LG SK WO
-    09 : OB LT SS HH    HT LG SK WO
-    10 : OB LT SS HH    HT LG SK WO
-    11 : OB LT SS HH    HT LG SK WO
-    12 : OB LT SS HH    HT LG SK WO
-
-    13 : OB LT SS HH    HT LG SK WO NC
-    14 : OB LT SS HH    HT LG SK WO NC
-
-    15 : OB LT SS HH    HT LG SK WO NC KT
-    16 : OB LT SS HH    HT LG SK WO NC KT
-    17 : OB LT SS HH    HT LG SK WO NC KT
-    18 : OB LT SS HH    HT LG SK WO NC KT
-    19 : OB LT SS HH    HT LG SK WO NC KT
-    20 : OB LT SS HH    HT LG SK WO NC KT
- """
-
 def setYear(yearValue, driver):
     option = driver.find_element_by_xpath("//*[@id='contents']/div[2]/ul/li[2]/img")
     option.click()
