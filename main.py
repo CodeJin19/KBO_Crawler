@@ -3,16 +3,18 @@
 import generator
 import setDB
 import crawling
+import test_for_csv
 
 if __name__ == "__main__":
     choice = 0
 
-    while choice != 5:
+    while choice != 6:
         print("1. 필요 패키지 설명")
         print("2. DB 세팅")
         print("3. Crawling 실행")
         print("4. csv 생성")
-        print("5. 종료")
+        print("5. csv 테스트")
+        print("6. 종료")
         choice = int(input("원하는 설정을 입력하세요 : "))
 
         if choice == 1:
@@ -28,7 +30,9 @@ if __name__ == "__main__":
             crawling.crawling()
         elif choice == 4:
             generator.generate()
-        elif choice != 5:
+        elif choice == 5:
+            test_for_csv.test()
+        elif choice != 6:
             print("다시 입력해주세요")
 
 """
