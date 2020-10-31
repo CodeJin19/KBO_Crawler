@@ -3,7 +3,7 @@
 import generator
 import setDB
 import crawling
-import test_for_csv
+import test
 
 if __name__ == "__main__":
     choice = 0
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         elif choice == 4:
             generator.generate()
         elif choice == 5:
-            test_for_csv.test()
+            test.test()
         elif choice != 6:
             print("다시 입력해주세요")
 
