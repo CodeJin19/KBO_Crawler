@@ -2,6 +2,7 @@ from selenium import webdriver
 import csv
 import pymysql
 import time
+import sys
 
 def test():
     f = open('KBO_data.csv', 'w', encoding='utf-8', newline="")
@@ -172,7 +173,6 @@ def test():
                         table.append(tmp.copy())
 
             tmp.clear()
-            print("test2")
 
             for j in range(len(table[0])):
                 sum = 0
