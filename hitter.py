@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 import setYear
 import setTeam
+import setSeason
 import time
 import pymysql
 
@@ -40,6 +41,7 @@ def hitter(driver, yearFrom, yearTo, teamList):
                     continue
 
             setTeam.setTeam(team, driver)
+            setSeason.setSeason(driver)
 
             flag = True
             page = 1
