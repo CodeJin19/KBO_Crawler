@@ -1,6 +1,6 @@
-import setYear
-import setTeam
-import setSeason
+from setYear import setYear
+from setTeam import setTeam
+from setSeason import setSeason
 import time
 import pymysql
 
@@ -24,7 +24,7 @@ def hitter(driver, yearFrom, yearTo, teamList):
             table[i].append('a')
 
     for year in range(yearFrom, (yearTo + 1)):
-        setYear.setYear(year, driver)
+        setYear(year, driver)
 
         for team in teamList:
             if year < 2008:
@@ -40,8 +40,8 @@ def hitter(driver, yearFrom, yearTo, teamList):
                 if team == 'HD':
                     continue
 
-            setTeam.setTeam(team, driver)
-            setSeason.setSeason(driver)
+            setTeam(team, driver)
+            setSeason(driver)
 
             flag = True
             page = 1

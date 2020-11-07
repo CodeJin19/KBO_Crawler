@@ -1,9 +1,9 @@
 from selenium import webdriver
+from hitter import hitter
+from pitcher import pitcher
+from defence import defence
+from runner import runner
 import time
-import hitter
-import pitcher
-import defence
-import runner
 
 
 def crawling():
@@ -29,10 +29,10 @@ def crawling():
         driver.get('https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx')
         time.sleep(2)
 
-        hitter.hitter(driver, yearFrom, yearTo, teamList)
-        pitcher.pitcher(driver, yearFrom, yearTo, teamList)
-        defence.defence(driver, yearFrom, yearTo, teamList)
-        runner.runner(driver, yearFrom, yearTo, teamList)
+        hitter(driver, yearFrom, yearTo, teamList)
+        pitcher(driver, yearFrom, yearTo, teamList)
+        defence(driver, yearFrom, yearTo, teamList)
+        runner(driver, yearFrom, yearTo, teamList)
     except BaseException as e:
         print("----------------------------------")
         print("error :")

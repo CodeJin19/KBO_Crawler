@@ -1,21 +1,23 @@
 #selenium 패키지 설치 terminal -> pip install selenium
 #pymysql 패키지 설치 terminal -> pip install pymysql
-import generator
-import setDB
-import crawling
-import test
+from setDB import setDB
+from crawling import crawling
+import csvGenerator
+import testCsvGenerator
+from test import test
 
 
 if __name__ == "__main__":
     choice = 0
 
-    while choice != 6:
+    while choice != 7:
         print("1. 필요 패키지 설명")
         print("2. DB 세팅")
         print("3. Crawling 실행")
         print("4. csv 생성")
-        print("5. csv 테스트")
-        print("6. 종료")
+        print("5. csv 테스트 모듈")
+        print("6. 테스트 csv 생성")
+        print("7. 종료")
         choice = int(input("원하는 설정을 입력하세요 : "))
 
         if choice == 1:
@@ -26,14 +28,16 @@ if __name__ == "__main__":
             print("3. pymysql")
             print("------------------------\n")
         elif choice == 2:
-            setDB.setDB()
+            setDB()
         elif choice == 3:
-            crawling.crawling()
+            crawling()
         elif choice == 4:
-            generator.generate()
+            csvGenerator.generate()
         elif choice == 5:
-            test.test()
-        elif choice != 6:
+            test()
+        elif choice == 6:
+            testCsvGenerator.generate()
+        elif choice != 7:
             print("다시 입력해주세요")
 
 """
