@@ -15,16 +15,23 @@ def controler(f):
     wr = csv.writer(f)
 
     teamList = ['OB', 'LT', 'SS', 'HH', 'HD', 'HT', 'LG', 'SK', 'WO', 'NC', 'KT']
-    teamKey = ['두산', '롯데', '삼성', '한화', '현대', 'KIA', 'LG', 'SK', '넥센', 'NC', 'KT']
+    teamName = ['두산', '롯데', '삼성', '한화', '현대', 'KIA', 'LG', 'SK', '넥센', 'NC', 'KT']
+
+    cur = conn.cursor()
 
     for year in range(yearFrom, (yearTo + 1)):
         if year < 2008:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
-                    if i == j or teamList[i] == 'WO' or teamList[i] == 'NC' or teamList[i] == 'KT' or teamList[j] == 'WO' or teamList[j] == 'NC' or teamList[j] == 'KT':
+                    if i <= j:
+                        continue
+                    elif teamList[i] == 'WO' or teamList[i] == 'NC' or teamList[i] == 'KT' or teamList[j] == 'WO' or teamList[j] == 'NC' or teamList[j] == 'KT':
                         continue
                     else:
-                        conn
+                        sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
+                        cur.execute(sql, (teamName[i], year))
+                        rows = cur.fetchall()
+
         elif year < 2013:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
