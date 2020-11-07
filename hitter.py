@@ -1,9 +1,9 @@
-from selenium.webdriver.common.by import By
 import setYear
 import setTeam
 import setSeason
 import time
 import pymysql
+
 
 def hitter(driver, yearFrom, yearTo, teamList):
     option = driver.find_element_by_xpath(
@@ -46,10 +46,8 @@ def hitter(driver, yearFrom, yearTo, teamList):
             flag = True
             page = 1
 
-            print(str(year) + " " + str(team))
-
             while(flag):
-                hitterTable = driver.find_element_by_xpath("//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]")
+                hitterTable = driver.find_element_by_xpath("//*[@id='cphContents_cphContents_cphContents_udpContent']/div[3]/table")
                 lines = hitterTable.find_elements_by_tag_name("tr")
 
                 for i in range(len(lines)):
@@ -99,4 +97,5 @@ def hitter(driver, yearFrom, yearTo, teamList):
                         flag = False
                 else:
                     flag = False
+
     conn.close()

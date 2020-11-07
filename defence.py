@@ -1,7 +1,9 @@
 import setYear
 import setTeam
+import setSeason
 import time
 import pymysql
+
 
 def defence(driver, yearFrom, yearTo, teamList):
     option = driver.find_element_by_xpath(
@@ -39,48 +41,100 @@ def defence(driver, yearFrom, yearTo, teamList):
                     continue
 
             setTeam.setTeam(team, driver)
+            setSeason.setSeason(driver)
 
-            for line in range(1, 21):
-                table[line - 1][0] = year
+            flag = True
+            page = 1
 
-                for idx in range(1, 18):
-                    try:
-                        data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
-                        table[line - 1][idx] = data.text
-                    except BaseException as e:
-                        data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
-                        table[line - 1][idx] = data.text
+            while(flag):
+                defenceTable = driver.find_element_by_xpath("//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table")
+                lines = defenceTable.find_elements_by_tag_name("tr")
 
-            for line in range(0, 20):
-                if table[line][17] == '-':
-                    csper = 0
+                for i in range(len(lines)):
+                    if i != 0:
+                        tmp = lines[i].text.split(' ')
+
+                        if len(tmp) == 17:
+                            if '/' in tmp[6]:
+                                ip = float(int(tmp[6].split("/")[0]) / int(
+                                        tmp[6].split("/")[1]))
+                            else:
+                                ip = float(tmp[6])
+                            if tmp[12] == '-':
+                                fpct = 0
+                            else:
+                                fpct = float(tmp[12])
+                            if tmp[16] == '-':
+                                csper = 0
+                            else:
+                                csper = float(tmp[16])
+                            yearVal = int(year)
+                            name = str(tmp[1])
+                            teamname = str(tmp[2])
+                            g = int(tmp[4])
+                            gs = int(tmp[5])
+                            e = int(tmp[7])
+                            pko = int(tmp[8])
+                            po = int(tmp[9])
+                            a = int(tmp[10])
+                            dp = int(tmp[11])
+                            pb = int(tmp[13])
+                            sb = int(tmp[14])
+                            cs = int(tmp[15])
+
+                        else:
+                            if tmp[17] == '-':
+                                csper = 0
+                            else:
+                                csper = float(tmp[17])
+                            if tmp[13] == '-':
+                                fpct = 0
+                            else:
+                                fpct = float(tmp[13])
+                            yearVal = int(year)
+                            name = str(tmp[1])
+                            teamname = str(tmp[2])
+                            g = int(tmp[4])
+                            gs = int(tmp[5])
+                            ip = int(tmp[6]) + float(int(tmp[7].split("/")[0]) / int(
+                                tmp[7].split("/")[1]))
+                            e = int(tmp[8])
+                            pko = int(tmp[9])
+                            po = int(tmp[10])
+                            a = int(tmp[11])
+                            dp = int(tmp[12])
+                            pb = int(tmp[14])
+                            sb = int(tmp[15])
+                            cs = int(tmp[16])
+
+                        sql = """insert into defencedb
+                                              (name, teamName, year, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
+                                              values('%s', '%s', '%d', '%d', '%d', '%f', '%d', '%d', '%d', '%d', '%d', '%f', '%d', '%d', '%d', '%f')
+                                              """ % (
+                        name, teamname, yearVal, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
+
+                        cur.execute(sql)
+                        conn.commit()
+
+                cnt = len(driver.find_elements_by_id("cphContents_cphContents_cphContents_ucPager_btnNo2"))
+
+                if 0 < cnt :
+                    if page == 1:
+                        driver.find_element_by_id("cphContents_cphContents_cphContents_ucPager_btnNo2").click()
+                        page = 2
+                        time.sleep(2)
+                        flag = True
+                    elif page == 2:
+                        driver.find_element_by_id("cphContents_cphContents_cphContents_ucPager_btnNo3").click()
+                        page = 3
+                        time.sleep(2)
+                        flag = True
+                    else:
+                        driver.find_element_by_id("cphContents_cphContents_cphContents_ucPager_btnNo1").click()
+                        page = 1
+                        time.sleep(2)
+                        flag = False
                 else:
-                    csper = float(table[line][17])
-                name = str(table[line][2])
-                teamname = str(table[line][3])
-                yearVal = int(table[line][0])
-                pos = str(table[line][4])
-                g = int(table[line][5])
-                gs = int(table[line][6])
-                ip = str(table[line][7])
-                e = int(table[line][8])
-                pko = int(table[line][9])
-                po = int(table[line][10])
-                a = int(table[line][11])
-                dp = int(table[line][12])
-                fpct = float(table[line][13])
-                pb = int(table[line][14])
-                sb = int(table[line][15])
-                cs = int(table[line][16])
-
-                sql = """insert into defencedb
-                      (name, teamName, year, pos, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
-                      values('%s', '%s', '%d', '%s', '%d', '%d', '%s', '%d', '%d', '%d', '%d', '%d', '%f', '%d', '%d', '%d', '%f')
-                      """ % (name, teamname, yearVal, pos, g, gs, ip, e, pko, po, a, dp, fpct, pb, sb, cs, csper)
-
-                cur.execute(sql)
-                conn.commit()
+                    flag = False
 
     conn.close()

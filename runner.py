@@ -1,7 +1,9 @@
 import setYear
 import setTeam
+import setSeason
 import time
 import pymysql
+
 
 def runner(driver, yearFrom, yearTo, teamList):
     option = driver.find_element_by_xpath(
@@ -23,7 +25,6 @@ def runner(driver, yearFrom, yearTo, teamList):
 
     for year in range(yearFrom, (yearTo + 1)):
         setYear.setYear(year, driver)
-        time.sleep(2)
 
         for team in teamList:
             if year < 2008:
@@ -40,41 +41,40 @@ def runner(driver, yearFrom, yearTo, teamList):
                     continue
 
             setTeam.setTeam(team, driver)
+            setSeason.setSeason(driver)
 
-            for line in range(1, 21):
-                table[line - 1][0] = year
+            flag = True
 
-                for idx in range(1, 11):
-                    try:
-                        data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
-                        table[line - 1][idx] = data.text
-                    except BaseException as e:
-                        data = driver.find_element_by_xpath(
-                            "//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table/tbody/tr[" + str(line) + "]/td[" + str(idx) + "]")
-                        table[line - 1][idx] = data.text
+            while(flag):
+                runnerTable = driver.find_element_by_xpath("//*[@id='cphContents_cphContents_cphContents_udpContent']/div[2]/table")
+                lines = runnerTable.find_elements_by_tag_name("tr")
 
-            for line in range(0, 20):
-                if table[line][8] == '-':
-                    sbper = 0
-                else:
-                    sbper = float(table[line][8])
-                name = str(table[line][2])
-                teamname = str(table[line][3])
-                yearVal = int(table[line][0])
-                g = int(table[line][4])
-                sba = int(table[line][5])
-                sb = int(table[line][6])
-                cs = int(table[line][7])
-                oob = int(table[line][9])
-                pko = int(table[line][10])
+                for i in range(len(lines)):
+                    if i != 0:
+                        tmp = lines[i].text.split(' ')
 
-                sql = """insert into runnerdb
-                      (name, teamName, year, g, sba, sb, cs, sbper, oob, pko)
-                      values('%s', '%s', '%d', '%d', '%d', '%d', '%d', '%f', '%d', '%d')
-                      """ % (name, teamname, yearVal, g, sba, sb, cs, sbper, oob, pko)
+                        if tmp[7] == '-':
+                            sbper = 0
+                        else:
+                            sbper = float(tmp[7])
+                        yearVal = int(year)
+                        name = str(tmp[1])
+                        teamname = str(tmp[2])
+                        g = int(tmp[3])
+                        sba = int(tmp[4])
+                        sb = int(tmp[5])
+                        cs = int(tmp[6])
+                        oob = int(tmp[8])
+                        pko = int(tmp[9])
 
-                cur.execute(sql)
-                conn.commit()
+                        sql = """insert into runnerdb
+                                              (name, teamName, year, g, sba, sb, cs, sbper, oob, pko)
+                                              values('%s', '%s', '%d', '%d', '%d', '%d', '%d', '%f', '%d', '%d')
+                                              """ % (name, teamname, yearVal, g, sba, sb, cs, sbper, oob, pko)
+
+                        cur.execute(sql)
+                        conn.commit()
+
+                flag = False
 
     conn.close()

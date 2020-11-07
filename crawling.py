@@ -5,6 +5,7 @@ import pitcher
 import defence
 import runner
 
+
 def crawling():
     print("몇 년도부터 크롤링할 지 입력하세요 (최소 2010) YYYY: ")
     yearFrom = int(input())
@@ -29,9 +30,9 @@ def crawling():
         time.sleep(2)
 
         hitter.hitter(driver, yearFrom, yearTo, teamList)
-        #pitcher.pitcher(driver, yearFrom, yearTo, teamList)
-        #defence.defence(driver, yearFrom, yearTo, teamList)
-        #runner.runner(driver, yearFrom, yearTo, teamList)
+        pitcher.pitcher(driver, yearFrom, yearTo, teamList)
+        defence.defence(driver, yearFrom, yearTo, teamList)
+        runner.runner(driver, yearFrom, yearTo, teamList)
     except BaseException as e:
         print("----------------------------------")
         print("error :")
