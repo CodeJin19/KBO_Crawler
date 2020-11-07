@@ -307,6 +307,9 @@ def controler(f):
     driver = webdriver.Chrome('C:\ChromeDriver\chromedriver', options=options)
 """
 """
+2010 : 1 / 2 감소
+2010.09.21
+
 2010.04.09(금)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
 
@@ -321,12 +324,19 @@ def controler(f):
 2010.09.16(목)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblHomeHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
 
-2010.09.21(화)list index out of range
-
 2010.10.13(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
 
-2011.03.15(화)list index out of range
+
+2011 : 8 / 17 감소
+2011.03.13
+2011.05.12
+2011.06.18
+2011.07.06
+2011.07.31
+2011.08.14
+2011.09.25
+2011.10.04
 
 2011.04.10(일)list index out of range
 
@@ -334,47 +344,35 @@ def controler(f):
 
 2011.05.11(수)list index out of range
 
-2011.05.12(목)list index out of range
-
 2011.05.15(일)list index out of range
 
 2011.05.21(토)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblHomeHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
 
-2011.06.18(토)list index out of range
-
 2011.07.01(금)list index out of range
-
-2011.07.06(수)list index out of range
 
 2011.07.08(금)list index out of range
 
 2011.07.23(토)list index out of range
 
-2011.07.31(일)list index out of range
-
 2011.08.10(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
-
-2011.08.14(일)list index out of range
 
 2011.09.09(금)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblHomeHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
 
 2011.09.13(화)list index out of range
 
-2011.09.25(일)list index out of range
-
-2011.10.04(화)list index out of range
-
 2011.10.06(목)list index out of range
+
+
+2012 : 8 / 59 감소
+2012.03.30
 
 2012.03.21(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
 
 2012.03.24(토)list index out of range
-
-2012.03.30(금)list index out of range
 
 2012.04.01(일)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
