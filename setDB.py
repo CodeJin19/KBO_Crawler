@@ -8,7 +8,7 @@ def setDB():
 
     cur.execute("DROP TABLE IF EXISTS hitterDB")
     cur.execute("CREATE TABLE hitterDB(idx INT(5) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), teamName VARCHAR(10), year INT(5), avg DOUBLE(4, 3), g INT(3), pa INT(3), ab INT(3), r INT(3), h INT(3), 2b INT(3), 3b INT(3), hr INT(3), tb INT(3), rbi INT(3), sac INT(3), sf INT(3))")
-    
+
     cur.execute("DROP TABLE IF EXISTS pitcherDB")
     cur.execute("CREATE TABLE pitcherDB(idx INT(5) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), teamName VARCHAR(10), year INT(5), era DOUBLE(4, 2), g INT(3), w INT(3), l INT(3), sv INT(3), hld INT(3), wpct DOUBLE(4, 3), ip DOUBLE(5, 2), h INT(3), hr INT(3), bb INT(3), hbp INT(3), so INT(3), r INT(3), er INT(3), whip DOUBLE(4, 2))")
 

@@ -366,8 +366,19 @@ def controler(f):
 2011.10.06(목)list index out of range
 
 
-2012 : 8 / 59 감소
+2012 : 12 / 59 감소
 2012.03.30
+2012.04.19
+2012.04.26
+2012.05.13
+2012.06.06
+2012.06.07
+2012.07.08
+2012.08.21
+2012.08.29
+2012.09.06
+2012.09.19
+2012.09.26
 
 2012.03.21(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
   (Session info: headless chrome=86.0.4240.75)
@@ -379,10 +390,6 @@ def controler(f):
 
 2012.04.13(금)list index out of range
 
-2012.04.19(목)list index out of range
-
-2012.04.26(목)list index out of range
-
 2012.04.28(토)list index out of range
 
 2012.04.29(일)list index out of range
@@ -393,17 +400,11 @@ def controler(f):
 
 2012.05.09(수)list index out of range
 
-2012.05.13(일)list index out of range
-
 2012.05.25(금)list index out of range
 
 2012.05.31(목)list index out of range
 
 2012.06.01(금)list index out of range
-
-2012.06.06(수)list index out of range
-
-2012.06.07(목)list index out of range
 
 2012.06.12(화)list index out of range
 
@@ -416,8 +417,6 @@ def controler(f):
 2012.06.30(토)list index out of range
 
 2012.07.04(수)list index out of range
-
-2012.07.08(일)list index out of range
 
 2012.07.12(목)list index out of range
 
@@ -450,17 +449,11 @@ def controler(f):
 
 2012.08.19(일)list index out of range
 
-2012.08.21(화)list index out of range
-
 2012.08.25(토)list index out of range
-
-2012.08.29(수)list index out of range
 
 2012.09.02(일)list index out of range
 
 2012.09.05(수)list index out of range
-
-2012.09.06(목)list index out of range
 
 2012.09.10(월)list index out of range
 
@@ -472,15 +465,11 @@ def controler(f):
 
 2012.09.16(일)list index out of range
 
-2012.09.19(수)list index out of range
-
 2012.09.22(토)list index out of range
 
 2012.09.23(일)list index out of range
 
 2012.09.25(화)list index out of range
-
-2012.09.26(수)list index out of range
 
 2012.09.27(목)list index out of range
 
@@ -506,64 +495,79 @@ def controler(f):
 2012.11.11(일)Message: element click intercepted: Element <li game_sc="3" le_id="1" sr_id="8" season="2012" g_id="20121111YOLM0" g_dt="20121111" s_nm="사직" vs_game_cn="1" away_id="YO" home_id="LM" away_nm="요미우리" home_nm="라미고" away_p_id="10405" home_p_id="10216" entry_ck="1" start_ck="1" result_ck="0" lineup_ck="0" vod_ck="0" kbot_se="0" class="list-review" style="float: left; list-style: none; position: relative; width: 160px; margin-right: 9px;">...</li> is not clickable at point (1077, 353). Other element would receive the click: <div class="bx-loading"></div>
   (Session info: headless chrome=86.0.4240.75)
 
+
+2013 : 12 / 59 감소
+2013.03.02(토)
 2013.03.02(토)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.03(일)
 2013.03.03(일)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.04(월)
 2013.03.04(월)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.05(화)
 2013.03.05(화)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.06(수)
 2013.03.06(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.08(금)
 2013.03.08(금)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.09(토)
 2013.03.09(토)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.10(일)
 2013.03.10(일)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.11(월)
 2013.03.11(월)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.12(화)
 2013.03.12(화)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.13(수)
 2013.03.13(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.14(목)
 2013.03.14(목)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
+2013.03.15(금)
 2013.03.15(금)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.03.16(토)
 2013.03.16(토)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.03.17(일)
 2013.03.17(일)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.03.18(월)
 2013.03.18(월)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.03.19(화)
 2013.03.19(화)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.03.20(수)
 2013.03.20(수)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='contents']/div[3]/div/div[1]/ul"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.03.21(목)
 2013.03.21(목)list index out of range
@@ -571,9 +575,7 @@ def controler(f):
 2013.03.23(토)
 2013.03.23(토)list index out of range
 2013.03.24(일)
-2013.03.24(일)list index out of range
 2013.03.30(토)
-2013.03.30(토)list index out of range
 2013.03.31(일)
 2013.04.02(화)
 2013.04.02(화)list index out of range
@@ -583,14 +585,12 @@ def controler(f):
 2013.04.06(토)
 2013.04.07(일)
 2013.04.09(화)
-2013.04.09(화)list index out of range
 2013.04.10(수)
 2013.04.10(수)list index out of range
 2013.04.11(목)
 2013.04.12(금)
 2013.04.12(금)list index out of range
 2013.04.13(토)
-2013.04.13(토)list index out of range
 2013.04.14(일)
 2013.04.14(일)list index out of range
 2013.04.16(화)
@@ -606,7 +606,6 @@ def controler(f):
 2013.04.24(수)
 2013.04.24(수)list index out of range
 2013.04.25(목)
-2013.04.25(목)list index out of range
 2013.04.26(금)
 2013.04.27(토)
 2013.04.27(토)list index out of range
@@ -621,9 +620,7 @@ def controler(f):
 2013.05.03(금)
 2013.05.03(금)list index out of range
 2013.05.04(토)
-2013.05.04(토)list index out of range
 2013.05.05(일)
-2013.05.05(일)list index out of range
 2013.05.07(화)
 2013.05.07(화)list index out of range
 2013.05.08(수)
@@ -631,7 +628,6 @@ def controler(f):
 2013.05.09(목)list index out of range
 2013.05.10(금)
 2013.05.11(토)
-2013.05.11(토)list index out of range
 2013.05.12(일)
 2013.05.12(일)list index out of range
 2013.05.14(화)
@@ -641,7 +637,6 @@ def controler(f):
 2013.05.16(목)
 2013.05.16(목)list index out of range
 2013.05.17(금)
-2013.05.17(금)list index out of range
 2013.05.18(토)
 2013.05.19(일)
 2013.05.19(일)list index out of range
@@ -671,17 +666,14 @@ def controler(f):
 2013.06.06(목)
 2013.06.06(목)list index out of range
 2013.06.07(금)
-2013.06.07(금)list index out of range
 2013.06.08(토)
 2013.06.08(토)list index out of range
 2013.06.09(일)
-2013.06.09(일)list index out of range
 2013.06.11(화)
 2013.06.11(화)list index out of range
 2013.06.12(수)
 2013.06.12(수)list index out of range
 2013.06.13(목)
-2013.06.13(목)list index out of range
 2013.06.14(금)
 2013.06.15(토)
 2013.06.15(토)list index out of range
@@ -703,7 +695,6 @@ def controler(f):
 2013.06.28(금)
 2013.06.28(금)list index out of range
 2013.06.29(토)
-2013.06.29(토)list index out of range
 2013.06.30(일)
 2013.07.02(화)
 2013.07.02(화)list index out of range
@@ -722,11 +713,10 @@ def controler(f):
 2013.07.12(금)
 2013.07.12(금)list index out of range
 2013.07.13(토)
-2013.07.13(토)list index out of range
 2013.07.14(일)
 2013.07.16(화)
 2013.07.16(화)Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='tblAwayHitter2']/table/tbody/tr[1]"}
-  (Session info: headless chrome=86.0.4240.75)
+  (Session info: headless chrome=86.0.4240.183)
 
 2013.07.17(수)
 2013.07.17(수)list index out of range
@@ -749,7 +739,6 @@ def controler(f):
 2013.08.02(금)
 2013.08.02(금)list index out of range
 2013.08.03(토)
-2013.08.03(토)list index out of range
 2013.08.04(일)
 2013.08.06(화)
 2013.08.06(화)list index out of range
@@ -766,7 +755,6 @@ def controler(f):
 2013.08.14(수)
 2013.08.14(수)list index out of range
 2013.08.15(목)
-2013.08.15(목)list index out of range
 2013.08.16(금)
 2013.08.16(금)list index out of range
 2013.08.17(토)
@@ -794,7 +782,6 @@ def controler(f):
 2013.08.31(토)list index out of range
 2013.09.01(일)
 2013.09.03(화)
-2013.09.03(화)list index out of range
 2013.09.04(수)
 2013.09.05(목)
 2013.09.05(목)list index out of range
@@ -809,7 +796,6 @@ def controler(f):
 2013.09.12(목)
 2013.09.12(목)list index out of range
 2013.09.13(금)
-2013.09.13(금)list index out of range
 2013.09.14(토)
 2013.09.14(토)list index out of range
 2013.09.15(일)
@@ -821,4 +807,58 @@ def controler(f):
 2013.09.18(수)
 2013.09.18(수)list index out of range
 2013.09.19(목)
+2013.09.20(금)
+2013.09.21(토)
+2013.09.21(토)list index out of range
+2013.09.22(일)
+2013.09.23(월)
+2013.09.24(화)
+2013.09.24(화)list index out of range
+2013.09.25(수)
+2013.09.25(수)list index out of range
+2013.09.26(목)
+2013.09.26(목)list index out of range
+2013.09.27(금)
+2013.09.27(금)list index out of range
+2013.09.28(토)
+2013.09.28(토)list index out of range
+2013.09.29(일)
+2013.09.29(일)list index out of range
+2013.09.30(월)
+2013.09.30(월)list index out of range
+2013.10.01(화)
+2013.10.01(화)list index out of range
+2013.10.02(수)
+2013.10.02(수)list index out of range
+2013.10.03(목)
+2013.10.04(금)
+2013.10.04(금)list index out of range
+2013.10.05(토)
+2013.10.08(화)
+2013.10.09(수)
+2013.10.11(금)
+2013.10.12(토)
+2013.10.14(월)
+2013.10.16(수)
+2013.10.17(목)
+2013.10.19(토)
+2013.10.20(일)
+2013.10.24(목)
+2013.10.25(금)
+2013.10.27(일)
+2013.10.28(월)
+2013.10.29(화)
+2013.10.31(목)
+2013.11.01(금)
+2013.11.15(금)
+2013.11.15(금)Message: element click intercepted: Element <li game_sc="3" le_id="1" sr_id="8" season="2013" g_id="20131115FBSS0" g_dt="20131115" s_nm="타이중" vs_game_cn="1" away_id="FB" home_id="SS" away_nm="볼로냐" home_nm="삼성" entry_ck="1" start_ck="0" result_ck="0" lineup_ck="0" vod_ck="0" kbot_se="0" class="list-review" style="float: left; list-style: none; position: relative; width: 160px; margin-right: 9px;">...</li> is not clickable at point (1077, 353). Other element would receive the click: <div class="bx-loading"></div>
+  (Session info: headless chrome=86.0.4240.183)
+
+2013.11.17(일)
+2013.11.17(일)Message: element click intercepted: Element <li game_sc="3" le_id="1" sr_id="8" season="2013" g_id="20131117SSTE0" g_dt="20131117" s_nm="타오위앤" vs_game_cn="1" away_id="SS" home_id="TE" away_nm="삼성" home_nm="퉁이" entry_ck="1" start_ck="0" result_ck="0" lineup_ck="0" vod_ck="0" kbot_se="0" class="list-review" style="float: left; list-style: none; position: relative; width: 160px; margin-right: 9px;">...</li> is not clickable at point (1077, 353). Other element would receive the click: <div class="bx-loading"></div>
+  (Session info: headless chrome=86.0.4240.183)
+
+2013.11.18(월)
+2013.11.18(월)Message: element click intercepted: Element <li game_sc="3" le_id="1" sr_id="8" season="2013" g_id="20131118CVSS0" g_dt="20131118" s_nm="타이중" vs_game_cn="1" away_id="CV" home_id="SS" away_nm="캔버라" home_nm="삼성" entry_ck="1" start_ck="0" result_ck="0" lineup_ck="0" vod_ck="0" kbot_se="0" class="list-review" style="float: left; list-style: none; position: relative; width: 160px; margin-right: 9px;">...</li> is not clickable at point (1077, 353). Other element would receive the click: <div class="bx-loading"></div>
+  (Session info: headless chrome=86.0.4240.183)
 """
