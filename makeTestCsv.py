@@ -17,9 +17,14 @@ def controler(f):
     teamList = ['OB', 'LT', 'SS', 'HH', 'HD', 'HT', 'LG', 'SK', 'WO', 'NC', 'KT']
     teamName = ['두산', '롯데', '삼성', '한화', '현대', 'KIA', 'LG', 'SK', '넥센', 'NC', 'KT']
 
+    table = []
+    tmp = []
+    actual = []
+    cnt = 0
+
     cur = conn.cursor()
 
-    for year in range(yearFrom, (yearTo + 1)):
+    for year in range(yearFrom, yearTo):
         if year < 2008:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
@@ -43,6 +48,59 @@ def controler(f):
                         sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
                         cur.execute(sql, (teamName[i], year))
                         rows = cur.fetchall()
+
+                        for row in rows:
+                            tmp.clear()
+                            cnt += 1
+
+                            for k in range(4, 20):
+                                tmp.append(row[k])
+
+                            table.append(tmp.copy())
+
+                        tmp.clear()
+
+                        for k in range(len(table[0])):
+                            sum = 0
+
+                            for l in range(len(table)):
+                                sum += float(table[l][k])
+
+                            avg = sum / cnt
+                            tmp.append(avg)
+                            actual.append(avg)
+
+                        table.clear()
+                        cnt = 0
+
+                        sql = "SELECT * FROM hitterdb WHERE teamname=%s and year=%s"
+                        cur.execute(sql, (teamName[j], year))
+                        rows = cur.fetchall()
+
+                        for row in rows:
+                            tmp.clear()
+                            cnt += 1
+
+                            for k in range(4, 17):
+                                tmp.append(row[k])
+
+                            table.append(tmp.copy())
+
+                        tmp.clear()
+
+                        for k in range(len(table[0])):
+                            sum = 0
+
+                            for l in range(len(table)):
+                                sum += float(table[l][k])
+
+                            avg = sum / cnt
+                            tmp.append(avg)
+                            actual.append(avg)
+
+                        wr.writerow(actual)
+                        actual.clear()
+
         elif year < 2015:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
@@ -52,6 +110,7 @@ def controler(f):
                         sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
                         cur.execute(sql, (teamName[i], year))
                         rows = cur.fetchall()
+
         else:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
