@@ -1,3 +1,4 @@
 venv/
 KBO_data.csv
+KBO_test_data.csv
 debug.log

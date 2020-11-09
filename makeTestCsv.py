@@ -35,24 +35,32 @@ def controler(f):
         elif year < 2013:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
-                    if i == j or teamList[i] == 'HD' or teamList[i] == 'NC' or teamList[i] == 'KT' or teamList[j] == 'HD' or teamList[j] == 'NC' or teamList[j] == 'KT':
+                    if i <= j:
+                        continue
+                    if teamList[i] == 'HD' or teamList[i] == 'NC' or teamList[i] == 'KT' or teamList[j] == 'HD' or teamList[j] == 'NC' or teamList[j] == 'KT':
                         continue
                     else:
-                        conn
+                        sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
+                        cur.execute(sql, (teamName[i], year))
+                        rows = cur.fetchall()
         elif year < 2015:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
                     if i == j or teamList[i] == 'HD' or teamList[i] == 'KT' or teamList[j] == 'HD' or teamList[j] == 'KT':
                         continue
                     else:
-                        conn
+                        sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
+                        cur.execute(sql, (teamName[i], year))
+                        rows = cur.fetchall()
         else:
             for i in range(len(teamList)):
                 for j in range(len(teamList)):
                     if i == j or teamList[i] == 'HD' or teamList[j] == 'HD':
                         continue
                     else:
-                        conn
+                        sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
+                        cur.execute(sql, (teamName[i], year))
+                        rows = cur.fetchall()
 
 
 """
