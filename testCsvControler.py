@@ -13,7 +13,6 @@ def controler(f):
     conn = pymysql.connect(host='localhost', user='root', password=passwd, db='sample', charset='utf8')
 
     teamList = ['OB', 'LT', 'SS', 'HH', 'HD', 'HT', 'LG', 'SK', 'WO', 'NC', 'KT']
-    teamName = ['두산', '롯데', '삼성', '한화', '현대', 'KIA', 'LG', 'SK', '넥센', 'NC', 'KT']
 
     for year in range(yearFrom, yearTo):
         if year < 2008:
@@ -24,7 +23,7 @@ def controler(f):
                     elif teamList[i] == 'WO' or teamList[i] == 'NC' or teamList[i] == 'KT' or teamList[j] == 'WO' or teamList[j] == 'NC' or teamList[j] == 'KT':
                         continue
                     else:
-                        generator(f, conn, teamName[i], teamName[j], year)
+                        generator(f, conn, i, j, year)
 
         elif year < 2013:
             for i in range(len(teamList)):
@@ -34,7 +33,7 @@ def controler(f):
                     if teamList[i] == 'HD' or teamList[i] == 'NC' or teamList[i] == 'KT' or teamList[j] == 'HD' or teamList[j] == 'NC' or teamList[j] == 'KT':
                         continue
                     else:
-                        generator(f, conn, teamName[i], teamName[j], year)
+                        generator(f, conn, i, j, year)
 
         elif year < 2015:
             for i in range(len(teamList)):
@@ -42,7 +41,7 @@ def controler(f):
                     if i == j or teamList[i] == 'HD' or teamList[i] == 'KT' or teamList[j] == 'HD' or teamList[j] == 'KT':
                         continue
                     else:
-                        generator(f, conn, teamName[i], teamName[j], year)
+                        generator(f, conn, i, j, year)
 
         else:
             for i in range(len(teamList)):
@@ -50,4 +49,4 @@ def controler(f):
                     if i == j or teamList[i] == 'HD' or teamList[j] == 'HD':
                         continue
                     else:
-                        generator(f, conn, teamName[i], teamName[j], year)
+                        generator(f, conn, i, j, year)
