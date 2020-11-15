@@ -78,6 +78,9 @@ def generator(f, conn, x, y, year):
     actual.append(teamList[y])
     actual.append(teamList[x])
 
+    table.clear()
+    cnt = 0
+
     #team2 def
     sql = "SELECT * FROM pitcherdb WHERE teamname=%s and year=%s"
     cur.execute(sql, (teamName[y], year))
